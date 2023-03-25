@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SemestralkaLibrary;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,15 +7,18 @@ using System.Threading.Tasks;
 
 namespace SemestralkaMaybe.Entities
 {
-    internal class User
+    public class User
     {
-        private String Name;
-        private String Surname;
-        private Book[] BooksRead;
-        private double TimeSpentReading;
-        private String UserName;
-        private String Password;
-        private String EMail;
+        public String Name { get; set; }
+        public String Surname { get; set; }
+        public Book[] BooksRead { get; set; }
+        public double TimeSpentReading { get; set; }
+        public String EMail { get; set; }
+        public String UserName { get; set; }
+
+        public String Password { get; set; }
+
+        private PasswordHash passwordHash = new PasswordHash();
 
         public User(string name, string surname, Book[] booksRead, double timeSpentReading, string userName, string password, string eMail)
         {
@@ -23,8 +27,10 @@ namespace SemestralkaMaybe.Entities
             BooksRead = booksRead;
             TimeSpentReading = timeSpentReading;
             UserName = userName;
-            Password = password;
+            Password = passwordHash.PasswordHashing(password);
             EMail = eMail;
         }
+
+        
     }
 }

@@ -6,15 +6,15 @@ using System.Threading.Tasks;
 
 namespace SemestralkaMaybe.Entities
 {
-    internal class Book
+    public class Book
     {
-
-        private String Title;
-        private int ReleaseYear;
-        private Author Author;
-        private String Date;
-        private int TimesRead;
-        private double AverageReadTime;
+        
+        public String Title { get; set; }
+        public int ReleaseYear { get; set; }
+        public Author Author { get; set; }
+        public String Date { get; set; }
+        public int TimesRead { get; set; }
+        public double AverageReadTime { get; set; }
 
         public Book(string title, int releaseYear, Author author, string date, int timesRead, double averageReadTime)
         {
