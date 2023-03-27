@@ -11,13 +11,13 @@ namespace SemestralkaMaybe.Entities
         private string title;
         private int releaseYear;
         private Author author;
-        private string date;
+        private DateTime dateRead;
         private int timesRead;
         private double averageReadTime;
         public String Title { get => title; set => title = value; }
         public int ReleaseYear { get => releaseYear; set => releaseYear = value; }
         public Author Author { get => author; set => author = value; }
-        public String Date { get => date; set => date = value; }
+        public DateTime DateRead { get => dateRead; set => dateRead = value; }
         public int TimesRead { get => timesRead; set => timesRead = value; }
         public double AverageReadTime { get => averageReadTime; set => averageReadTime = value; }
 
