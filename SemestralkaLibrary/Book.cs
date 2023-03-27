@@ -21,12 +21,12 @@ namespace SemestralkaMaybe.Entities
         public int TimesRead { get => timesRead; set => timesRead = value; }
         public double AverageReadTime { get => averageReadTime; set => averageReadTime = value; }
 
-        public Book(string title, int releaseYear, Author author, string date, int timesRead, double averageReadTime)
+        public Book(string title, int releaseYear, Author author, DateTime date, int timesRead, double averageReadTime)
         {
             Title = title;
             ReleaseYear = releaseYear;
             Author = author;
-            Date = date;
+            DateRead = date;
             TimesRead = timesRead;
             AverageReadTime = averageReadTime;
         }
