@@ -9,14 +9,21 @@ namespace SemestralkaMaybe.Entities
 {
     public class User
     {
-        public String Name { get; set; }
-        public String Surname { get; set; }
-        public Book[] BooksRead { get; set; }
-        public double TimeSpentReading { get; set; }
-        public String EMail { get; set; }
-        public String UserName { get; set; }
-
-        public String Password { get; set; }
+        private string name;
+        private string surname;
+        private Book[] booksRead;
+        private double timeSpentReading;
+        private string eMail;
+        private string userName;
+        private string password;
+        
+        public String Name { get => name; set => name = value; }
+        public String Surname { get => surname; set => surname = value; }
+        public Book[] BooksRead { get => booksRead; set => booksRead = value; }
+        public double TimeSpentReading { get => timeSpentReading; set => timeSpentReading = value; }
+        public String EMail { get => eMail; set => eMail = value; }
+        public String UserName { get => userName; set => userName = value; }
+        public String Password { get => password; init => password = value; }
 
         private PasswordHash passwordHash = new PasswordHash();
 
@@ -30,7 +37,5 @@ namespace SemestralkaMaybe.Entities
             Password = passwordHash.PasswordHashing(password);
             EMail = eMail;
         }
-
-        
     }
 }

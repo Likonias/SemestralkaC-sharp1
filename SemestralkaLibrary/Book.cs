@@ -8,13 +8,18 @@ namespace SemestralkaMaybe.Entities
 {
     public class Book
     {
-        
-        public String Title { get; set; }
-        public int ReleaseYear { get; set; }
-        public Author Author { get; set; }
-        public String Date { get; set; }
-        public int TimesRead { get; set; }
-        public double AverageReadTime { get; set; }
+        private string title;
+        private int releaseYear;
+        private Author author;
+        private string date;
+        private int timesRead;
+        private double averageReadTime;
+        public String Title { get => title; set => title = value; }
+        public int ReleaseYear { get => releaseYear; set => releaseYear = value; }
+        public Author Author { get => author; set => author = value; }
+        public String Date { get => date; set => date = value; }
+        public int TimesRead { get => timesRead; set => timesRead = value; }
+        public double AverageReadTime { get => averageReadTime; set => averageReadTime = value; }
 
         public Book(string title, int releaseYear, Author author, string date, int timesRead, double averageReadTime)
         {

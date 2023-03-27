@@ -8,11 +8,16 @@ namespace SemestralkaMaybe.Entities
 {
     public class Author
     {
-        public String Name { get; set; }
-        public String Surname { get; set; }
-        public int BornInYear { get; set; }
-        public int? DiedInYear { get; set; }
-        public Book[] Books { get; set; }
+        private string name;
+        private string surname;
+        private int bornInYear;
+        private int? diedInYear;
+        private Book[] books;
+        public String Name { get => name; set => name = value; }
+        public String Surname { get => surname; set => surname = value; }
+        public int BornInYear { get => bornInYear; set => bornInYear = value; }
+        public int? DiedInYear { get => diedInYear; set => diedInYear = value; }
+        public Book[] Books { get => books; set => books = value; }
 
         public Author(string name, string surname, int bornInYear, int? diedInYear, Book[] books)
         {
