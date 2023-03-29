@@ -28,101 +28,111 @@
         /// </summary>
         private void InitializeComponent()
         {
-            label1 = new Label();
-            label2 = new Label();
-            buttonExit = new Button();
-            buttonLogin = new Button();
-            buttonNewUser = new Button();
-            textBoxUsername = new TextBox();
-            textBoxPassword = new TextBox();
-            label3 = new Label();
-            SuspendLayout();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.buttonExit = new System.Windows.Forms.Button();
+            this.buttonLogin = new System.Windows.Forms.Button();
+            this.buttonNewUser = new System.Windows.Forms.Button();
+            this.textBoxUsername = new System.Windows.Forms.TextBox();
+            this.textBoxPassword = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.SuspendLayout();
             // 
             // label1
             // 
-            label1.AutoSize = true;
-            label1.Location = new Point(12, 9);
-            label1.Name = "label1";
-            label1.Size = new Size(65, 15);
-            label1.TabIndex = 0;
-            label1.Text = "User Name";
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(14, 12);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(82, 20);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "User Name";
             // 
             // label2
             // 
-            label2.AutoSize = true;
-            label2.Location = new Point(12, 37);
-            label2.Name = "label2";
-            label2.Size = new Size(57, 15);
-            label2.TabIndex = 1;
-            label2.Text = "Password";
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(14, 49);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(70, 20);
+            this.label2.TabIndex = 1;
+            this.label2.Text = "Password";
             // 
             // buttonExit
             // 
-            buttonExit.Location = new Point(12, 124);
-            buttonExit.Name = "buttonExit";
-            buttonExit.Size = new Size(110, 23);
-            buttonExit.TabIndex = 2;
-            buttonExit.Text = "Exit";
-            buttonExit.UseVisualStyleBackColor = true;
+            this.buttonExit.Location = new System.Drawing.Point(14, 165);
+            this.buttonExit.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.buttonExit.Name = "buttonExit";
+            this.buttonExit.Size = new System.Drawing.Size(126, 31);
+            this.buttonExit.TabIndex = 2;
+            this.buttonExit.Text = "Exit";
+            this.buttonExit.UseVisualStyleBackColor = true;
+            this.buttonExit.Click += new System.EventHandler(this.buttonExit_Click);
             // 
             // buttonLogin
             // 
-            buttonLogin.Location = new Point(142, 124);
-            buttonLogin.Name = "buttonLogin";
-            buttonLogin.Size = new Size(110, 23);
-            buttonLogin.TabIndex = 3;
-            buttonLogin.Text = "Login";
-            buttonLogin.UseVisualStyleBackColor = true;
+            this.buttonLogin.Location = new System.Drawing.Point(162, 165);
+            this.buttonLogin.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.buttonLogin.Name = "buttonLogin";
+            this.buttonLogin.Size = new System.Drawing.Size(126, 31);
+            this.buttonLogin.TabIndex = 3;
+            this.buttonLogin.Text = "Login";
+            this.buttonLogin.UseVisualStyleBackColor = true;
+            this.buttonLogin.Click += new System.EventHandler(this.buttonLogin_Click);
             // 
             // buttonNewUser
             // 
-            buttonNewUser.Location = new Point(12, 87);
-            buttonNewUser.Name = "buttonNewUser";
-            buttonNewUser.Size = new Size(240, 23);
-            buttonNewUser.TabIndex = 4;
-            buttonNewUser.Text = "Create New User";
-            buttonNewUser.UseVisualStyleBackColor = true;
+            this.buttonNewUser.Location = new System.Drawing.Point(14, 116);
+            this.buttonNewUser.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.buttonNewUser.Name = "buttonNewUser";
+            this.buttonNewUser.Size = new System.Drawing.Size(274, 31);
+            this.buttonNewUser.TabIndex = 4;
+            this.buttonNewUser.Text = "Create New User";
+            this.buttonNewUser.UseVisualStyleBackColor = true;
+            this.buttonNewUser.Click += new System.EventHandler(this.buttonNewUser_Click);
             // 
             // textBoxUsername
             // 
-            textBoxUsername.Location = new Point(81, 6);
-            textBoxUsername.Name = "textBoxUsername";
-            textBoxUsername.Size = new Size(171, 23);
-            textBoxUsername.TabIndex = 5;
+            this.textBoxUsername.Location = new System.Drawing.Point(93, 8);
+            this.textBoxUsername.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.textBoxUsername.Name = "textBoxUsername";
+            this.textBoxUsername.Size = new System.Drawing.Size(195, 27);
+            this.textBoxUsername.TabIndex = 5;
             // 
             // textBoxPassword
             // 
-            textBoxPassword.Location = new Point(81, 34);
-            textBoxPassword.Name = "textBoxPassword";
-            textBoxPassword.Size = new Size(171, 23);
-            textBoxPassword.TabIndex = 6;
+            this.textBoxPassword.Location = new System.Drawing.Point(93, 45);
+            this.textBoxPassword.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.textBoxPassword.Name = "textBoxPassword";
+            this.textBoxPassword.Size = new System.Drawing.Size(195, 27);
+            this.textBoxPassword.TabIndex = 6;
             // 
             // label3
             // 
-            label3.AutoSize = true;
-            label3.Location = new Point(12, 69);
-            label3.Name = "label3";
-            label3.Size = new Size(112, 15);
-            label3.TabIndex = 7;
-            label3.Text = "Are you a new user?";
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(14, 92);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(141, 20);
+            this.label3.TabIndex = 7;
+            this.label3.Text = "Are you a new user?";
             // 
             // BooklistLogin
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
-            AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(264, 159);
-            Controls.Add(label3);
-            Controls.Add(textBoxPassword);
-            Controls.Add(textBoxUsername);
-            Controls.Add(buttonNewUser);
-            Controls.Add(buttonLogin);
-            Controls.Add(buttonExit);
-            Controls.Add(label2);
-            Controls.Add(label1);
-            Name = "BooklistLogin";
-            Text = "BookList Login";
-            ResumeLayout(false);
-            PerformLayout();
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(302, 212);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.textBoxPassword);
+            this.Controls.Add(this.textBoxUsername);
+            this.Controls.Add(this.buttonNewUser);
+            this.Controls.Add(this.buttonLogin);
+            this.Controls.Add(this.buttonExit);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
+            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.Name = "BooklistLogin";
+            this.Text = "BookList Login";
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
         }
 
         #endregion
