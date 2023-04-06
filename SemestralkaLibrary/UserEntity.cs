@@ -11,7 +11,7 @@ namespace SemestralkaMaybe.Entities
     {
         private string name;
         private string surname;
-        private LinkedList<Book> booksRead;
+        private List<Book> booksRead;
         private double timeSpentReading;
         private string eMail;
         private string userName;
@@ -19,7 +19,7 @@ namespace SemestralkaMaybe.Entities
         
         public String Name { get => name; set => name = value; }
         public String Surname { get => surname; set => surname = value; }
-        public LinkedList<Book> BooksRead { get => booksRead; set => booksRead = value; }
+        public List<Book> BooksRead { get => booksRead; set => booksRead = value; }
         public double TimeSpentReading { get => timeSpentReading; set => timeSpentReading = value; }
         public String EMail { get => eMail; set => eMail = value; }
         public String UserName { get => userName; set => userName = value; }
@@ -31,7 +31,7 @@ namespace SemestralkaMaybe.Entities
         {
             Name = name;
             Surname = surname;
-            BooksRead = new LinkedList<Book>();
+            BooksRead = new List<Book>();
             TimeSpentReading = 0;
             UserName = userName;
             Password = passwordHash.PasswordHashing(password);

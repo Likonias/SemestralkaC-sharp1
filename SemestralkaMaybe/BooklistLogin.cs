@@ -10,6 +10,7 @@ namespace SemestralkaMaybe
         private List<UserEntity> savedUsers = new List<UserEntity>();
         public BooklistLogin()
         {
+            SaveUserEntity();
             InitializeComponent();
         }
 
@@ -47,6 +48,17 @@ namespace SemestralkaMaybe
             newUser.ShowDialog();
             UserEntity createdUser = newUser.user;
             savedUsers.Add(createdUser);
+        }
+
+        private void SaveUserEntity()
+        {
+            FileSerializerDeserializer<UserEntity> fileSerializerDeserializer = new FileSerializerDeserializer<UserEntity>(savedUsers, "userEntityData.user");
+            fileSerializerDeserializer.Save();
+        }
+
+        private void LoadUserEntity()
+        {
+
         }
     }
 }
