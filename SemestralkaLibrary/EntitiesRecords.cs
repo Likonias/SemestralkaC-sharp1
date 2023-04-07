@@ -15,6 +15,9 @@ namespace SemestralkaLibrary
         private List<Author> authors = new List<Author> ();
         private List<UserEntity> userEntities = new List<UserEntity> ();
 
+        public List<Book> Books { get { return books; } }
+        public List<Author> Authors { get { return authors; } }
+        public List<UserEntity> UserEntities { get { return userEntities; } }
         public void AddBook(Book book)
         {
             books.Add(book);

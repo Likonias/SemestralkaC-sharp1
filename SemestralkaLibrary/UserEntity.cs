@@ -16,6 +16,7 @@ namespace SemestralkaMaybe.Entities
         private string eMail;
         private string userName;
         private string password;
+        private bool isHashed;
         
         public String Name { get => name; set => name = value; }
         public String Surname { get => surname; set => surname = value; }
@@ -24,18 +25,27 @@ namespace SemestralkaMaybe.Entities
         public String EMail { get => eMail; set => eMail = value; }
         public String UserName { get => userName; set => userName = value; }
         public String Password { get => password; init => password = value; }
-
-        private PasswordHash passwordHash = new PasswordHash();
-
-        public UserEntity(string name, string surname, string userName, string password, string eMail)
+        public bool IsHashed { get => isHashed; set => isHashed = value; }
+        
+        public UserEntity(string name, string surname, string userName, string password, string eMail, bool isHashed)
         {
             Name = name;
             Surname = surname;
             BooksRead = new List<Book>();
             TimeSpentReading = 0;
             UserName = userName;
-            Password = passwordHash.PasswordHashing(password);
+            if (isHashed)
+            {
+                Password = password;
+            }
+            else
+            {
+                Password = PasswordHash.PasswordHashing(password);
+                isHashed = true;
+            }
             EMail = eMail;
+            IsHashed = isHashed;
         }
+
     }
 }

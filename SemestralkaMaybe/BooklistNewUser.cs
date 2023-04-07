@@ -31,7 +31,8 @@ namespace SemestralkaMaybe
                 string password2 = textBoxPasswordAgain.Text;
                 if(password1.Equals(password2))
                 {
-                    user = new UserEntity(textBoxName.Text, textBoxSurname.Text, textBoxUsername.Text, password2, textBoxEMail.Text);
+                    user = new UserEntity(textBoxName.Text, textBoxSurname.Text, textBoxUsername.Text, password2, textBoxEMail.Text, false);
+                    this.Close();
                 }
                 else
                 {

@@ -7,34 +7,44 @@ namespace SemestralkaMaybe
 {
     public partial class BooklistLogin : Form
     {
-        private List<UserEntity> savedUsers = new List<UserEntity>();
+        private EntitiesRecords entitiesRecords = new EntitiesRecords();
         public BooklistLogin()
         {
-            SaveUserEntity();
+            try
+            {
+                LoadUserEntity();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
             InitializeComponent();
         }
 
         private void buttonExit_Click(object sender, EventArgs e)
         {
+            SaveUserEntity();
             this.Close();
         }
 
         private void buttonLogin_Click(object sender, EventArgs e)
         {
 
-            foreach (UserEntity user in savedUsers)
+            foreach (UserEntity user in entitiesRecords.UserEntities)
             {
                 if (user.UserName.Equals(textBoxUsername.Text))
                 {
-                    PasswordHash passwordHash = new PasswordHash();
-                    if(user.Password.Equals(passwordHash.PasswordHashing(textBoxPassword.Text))) 
-                    { 
-                        this.Close();
+                    string passHashed = PasswordHash.PasswordHashing(textBoxPassword.Text);
+                    if (PasswordHash.IsPasswordCorrect(user.Password, passHashed))
+                    {
+                        
                         BooklistMain booklistMain = new BooklistMain(user);
-                        booklistMain.ShowDialog();
+                        booklistMain.Show();
+                        this.Close();
                         return;
                     }
-
+                    MessageBox.Show("Wrong Password!");
+                    return;
                 }
             }
 
@@ -47,18 +57,20 @@ namespace SemestralkaMaybe
             BooklistNewUser newUser = new BooklistNewUser();
             newUser.ShowDialog();
             UserEntity createdUser = newUser.user;
-            savedUsers.Add(createdUser);
+            entitiesRecords.AddUser(createdUser);
+            SaveUserEntity();
         }
 
         private void SaveUserEntity()
         {
-            FileSerializerDeserializer<UserEntity> fileSerializerDeserializer = new FileSerializerDeserializer<UserEntity>(savedUsers, "userEntityData.user");
+            FileSerializerDeserializer<UserEntity> fileSerializerDeserializer = new FileSerializerDeserializer<UserEntity>(entitiesRecords, "userEntityData.user");
             fileSerializerDeserializer.Save();
         }
 
         private void LoadUserEntity()
         {
-
+            FileSerializerDeserializer<UserEntity> fileSerializerDeserializer = new FileSerializerDeserializer<UserEntity>(entitiesRecords, "userEntityData.user");
+            fileSerializerDeserializer.Load();
         }
     }
 }
