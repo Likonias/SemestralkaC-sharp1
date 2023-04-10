@@ -1,4 +1,5 @@
-﻿using SemestralkaMaybe.Entities;
+﻿using SemestralkaLibrary;
+using SemestralkaMaybe.Entities;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,8 +14,16 @@ namespace SemestralkaMaybe
 {
     public partial class BooklistMain : Form
     {
-        public BooklistMain(UserEntity user)
+        private EntitiesRecords entitiesRecords = new EntitiesRecords();
+        public BooklistMain()
         {
+            BooklistLogin booklistLogin = new BooklistLogin();
+            booklistLogin.ShowDialog();
+            entitiesRecords = booklistLogin.EntitiesRecords;
+            if (booklistLogin.exitClicked == true)
+            {
+                Environment.Exit(0);
+            }
             InitializeComponent();
         }
     }

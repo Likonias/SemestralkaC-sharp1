@@ -8,21 +8,24 @@ namespace SemestralkaMaybe
     public partial class BooklistLogin : Form
     {
         private EntitiesRecords entitiesRecords = new EntitiesRecords();
+        public EntitiesRecords EntitiesRecords { get { return entitiesRecords; } }
+        public bool exitClicked = false;
         public BooklistLogin()
         {
             try
             {
                 LoadUserEntity();
             }
-            catch (Exception ex)
+            catch (Exception e)
             {
-                Console.WriteLine(ex.ToString());
+                Console.WriteLine(e.ToString());
             }
             InitializeComponent();
         }
 
         private void buttonExit_Click(object sender, EventArgs e)
         {
+            exitClicked = true;
             SaveUserEntity();
             this.Close();
         }
@@ -37,9 +40,6 @@ namespace SemestralkaMaybe
                     string passHashed = PasswordHash.PasswordHashing(textBoxPassword.Text);
                     if (PasswordHash.IsPasswordCorrect(user.Password, passHashed))
                     {
-                        
-                        BooklistMain booklistMain = new BooklistMain(user);
-                        booklistMain.Show();
                         this.Close();
                         return;
                     }
