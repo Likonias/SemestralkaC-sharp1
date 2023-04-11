@@ -102,6 +102,7 @@
             this.textBoxPassword.Location = new System.Drawing.Point(93, 45);
             this.textBoxPassword.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.textBoxPassword.Name = "textBoxPassword";
+            this.textBoxPassword.PasswordChar = '*';
             this.textBoxPassword.Size = new System.Drawing.Size(195, 27);
             this.textBoxPassword.TabIndex = 6;
             // 

@@ -8,7 +8,9 @@ namespace SemestralkaMaybe
     public partial class BooklistLogin : Form
     {
         private EntitiesRecords entitiesRecords = new EntitiesRecords();
+        private UserEntity selectedUser;
         public EntitiesRecords EntitiesRecords { get { return entitiesRecords; } }
+        public UserEntity SelectedUser { get { return selectedUser; } }
         public bool exitClicked = false;
         public BooklistLogin()
         {
@@ -40,6 +42,7 @@ namespace SemestralkaMaybe
                     string passHashed = PasswordHash.PasswordHashing(textBoxPassword.Text);
                     if (PasswordHash.IsPasswordCorrect(user.Password, passHashed))
                     {
+                        selectedUser = user;
                         this.Close();
                         return;
                     }
@@ -54,7 +57,7 @@ namespace SemestralkaMaybe
 
         private void buttonNewUser_Click(object sender, EventArgs e)
         {
-            BooklistNewUser newUser = new BooklistNewUser();
+            BooklistNewUser newUser = new BooklistNewUser(entitiesRecords);
             newUser.ShowDialog();
             UserEntity createdUser = newUser.user;
             entitiesRecords.AddUser(createdUser);

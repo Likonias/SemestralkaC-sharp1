@@ -1,4 +1,5 @@
-﻿using SemestralkaMaybe.Entities;
+﻿using SemestralkaLibrary;
+using SemestralkaMaybe.Entities;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,9 +14,11 @@ namespace SemestralkaMaybe
 {
     public partial class BooklistNewUser : Form
     {
+        private EntitiesRecords entitiesRecords;
         public UserEntity user;
-        public BooklistNewUser()
+        public BooklistNewUser(EntitiesRecords entitiesRecords)
         {
+            this.entitiesRecords = entitiesRecords;
             InitializeComponent();
         }
 
@@ -25,7 +28,14 @@ namespace SemestralkaMaybe
             {
                 if(textBoxEMail.Text.Length == 0 || textBoxName.Text.Length == 0 || textBoxSurname.Text.Length == 0 || textBoxUsername.Text.Length == 0 || textBoxPassword.Text.Length == 0)
                 {
-                    throw new Exception();
+                    throw new Exception("Something went wrong, please try again!");
+                }
+                foreach (UserEntity user in entitiesRecords.UserEntities)
+                {
+                    if (user.UserName.Equals(textBoxUsername.Text))
+                    {
+                        throw new Exception("This username has been already used!");
+                    }
                 }
                 string password1 = textBoxPassword.Text;
                 string password2 = textBoxPasswordAgain.Text;
@@ -34,14 +44,11 @@ namespace SemestralkaMaybe
                     user = new UserEntity(textBoxName.Text, textBoxSurname.Text, textBoxUsername.Text, password2, textBoxEMail.Text, false);
                     this.Close();
                 }
-                else
-                {
-                    MessageBox.Show("Wrong Password!");
-                }
+                throw new Exception("Passwords do not match, please try again!");
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                MessageBox.Show("Something went wrong, please try again!");
+                MessageBox.Show(ex.Message);
             }
         }
 
