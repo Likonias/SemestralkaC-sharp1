@@ -16,8 +16,12 @@ namespace SemestralkaMaybe
     {
         private EntitiesRecords entitiesRecords = new EntitiesRecords();
         private UserEntity selectedUser;
+        private enum enumTopBar { myCollection, books, authors, topUsers }
+        private enumTopBar topBarSelected;
         public BooklistMain()
         {
+            InitializeComponent();
+            topBarSelected = enumTopBar.myCollection;
             BooklistLogin booklistLogin = new BooklistLogin();
             booklistLogin.ShowDialog();
             selectedUser = booklistLogin.SelectedUser;
@@ -26,8 +30,8 @@ namespace SemestralkaMaybe
             {
                 Environment.Exit(0);
             }
-            InitializeComponent();
             userInfoInitialize();
+            initializeListViews();
         }
 
         private void userInfoInitialize()
@@ -36,6 +40,29 @@ namespace SemestralkaMaybe
                 + "Name: " + selectedUser.Name + " " + selectedUser.Surname + "\n"
                 + "Username: " + selectedUser.UserName + "\n"
                 + "Time spent reading: " + selectedUser.TimeSpentReading;
+        }
+        private void initializeListViews()
+        {
+            switch (topBarSelected)
+            {
+                case enumTopBar.myCollection:
+                    break;
+                case enumTopBar.books:
+                    break;
+                case enumTopBar.authors:
+                    break;
+                case enumTopBar.topUsers:
+                    break;
+                default:
+                    break;
+            }
+        }
+        private void clearListViews()
+        {
+            listViewAuthors.Items.Clear();
+            listViewBooks.Items.Clear();
+            listViewMyCollection.Items.Clear();
+            listViewTopUsers.Items.Clear();
         }
     }
 }

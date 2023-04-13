@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.listViewMain = new System.Windows.Forms.ListView();
+            this.listViewMyCollection = new System.Windows.Forms.ListView();
             this.buttonAdd = new System.Windows.Forms.Button();
             this.buttonEdit = new System.Windows.Forms.Button();
             this.buttonRemove = new System.Windows.Forms.Button();
@@ -39,16 +39,19 @@
             this.buttonTopUsers = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.buttonSearch = new System.Windows.Forms.Button();
+            this.listViewBooks = new System.Windows.Forms.ListView();
+            this.listViewAuthors = new System.Windows.Forms.ListView();
+            this.listViewTopUsers = new System.Windows.Forms.ListView();
             this.SuspendLayout();
             // 
-            // listViewMain
+            // listViewMyCollection
             // 
-            this.listViewMain.Location = new System.Drawing.Point(14, 53);
-            this.listViewMain.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.listViewMain.Name = "listViewMain";
-            this.listViewMain.Size = new System.Drawing.Size(779, 666);
-            this.listViewMain.TabIndex = 0;
-            this.listViewMain.UseCompatibleStateImageBehavior = false;
+            this.listViewMyCollection.Location = new System.Drawing.Point(14, 53);
+            this.listViewMyCollection.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.listViewMyCollection.Name = "listViewMyCollection";
+            this.listViewMyCollection.Size = new System.Drawing.Size(779, 666);
+            this.listViewMyCollection.TabIndex = 0;
+            this.listViewMyCollection.UseCompatibleStateImageBehavior = false;
             // 
             // buttonAdd
             // 
@@ -138,11 +141,38 @@
             this.buttonSearch.Text = "Search";
             this.buttonSearch.UseVisualStyleBackColor = true;
             // 
+            // listViewBooks
+            // 
+            this.listViewBooks.Location = new System.Drawing.Point(14, 47);
+            this.listViewBooks.Name = "listViewBooks";
+            this.listViewBooks.Size = new System.Drawing.Size(779, 672);
+            this.listViewBooks.TabIndex = 12;
+            this.listViewBooks.UseCompatibleStateImageBehavior = false;
+            // 
+            // listViewAuthors
+            // 
+            this.listViewAuthors.Location = new System.Drawing.Point(14, 47);
+            this.listViewAuthors.Name = "listViewAuthors";
+            this.listViewAuthors.Size = new System.Drawing.Size(779, 672);
+            this.listViewAuthors.TabIndex = 13;
+            this.listViewAuthors.UseCompatibleStateImageBehavior = false;
+            // 
+            // listViewTopUsers
+            // 
+            this.listViewTopUsers.Location = new System.Drawing.Point(12, 47);
+            this.listViewTopUsers.Name = "listViewTopUsers";
+            this.listViewTopUsers.Size = new System.Drawing.Size(781, 672);
+            this.listViewTopUsers.TabIndex = 14;
+            this.listViewTopUsers.UseCompatibleStateImageBehavior = false;
+            // 
             // BooklistMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1000, 736);
+            this.Controls.Add(this.listViewTopUsers);
+            this.Controls.Add(this.listViewAuthors);
+            this.Controls.Add(this.listViewBooks);
             this.Controls.Add(this.buttonSearch);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.buttonTopUsers);
@@ -153,7 +183,7 @@
             this.Controls.Add(this.buttonRemove);
             this.Controls.Add(this.buttonEdit);
             this.Controls.Add(this.buttonAdd);
-            this.Controls.Add(this.listViewMain);
+            this.Controls.Add(this.listViewMyCollection);
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "BooklistMain";
             this.Text = "BookList Main";
@@ -164,7 +194,7 @@
 
         #endregion
 
-        private ListView listViewMain;
+        private ListView listViewMyCollection;
         private Button buttonAdd;
         private Button buttonEdit;
         private Button buttonRemove;
@@ -175,5 +205,8 @@
         private Button buttonTopUsers;
         private TextBox textBox1;
         private Button buttonSearch;
+        private ListView listViewBooks;
+        private ListView listViewAuthors;
+        private ListView listViewTopUsers;
     }
 }
