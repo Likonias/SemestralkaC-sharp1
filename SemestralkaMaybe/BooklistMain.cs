@@ -30,34 +30,70 @@ namespace SemestralkaMaybe
             {
                 Environment.Exit(0);
             }
-            userInfoInitialize();
-            initializeListViews();
+            UserInfoInitialize();
+            InitializeListViews();
+            SelectListView();
         }
 
-        private void userInfoInitialize()
+        private void UserInfoInitialize()
         {
             labelUserInfo.Text = "User info:\n\n"
                 + "Name: " + selectedUser.Name + " " + selectedUser.Surname + "\n"
                 + "Username: " + selectedUser.UserName + "\n"
                 + "Time spent reading: " + selectedUser.TimeSpentReading;
         }
-        private void initializeListViews()
+        private void SelectListView()
         {
-            switch (topBarSelected)
+            listViewMyCollection.Visible = false;
+            listViewBooks.Visible = false;
+            listViewAuthors.Visible = false;
+            listViewTopUsers.Visible = false;
+
+            switch(topBarSelected)
             {
                 case enumTopBar.myCollection:
+                    listViewMyCollection.Visible = true;
                     break;
                 case enumTopBar.books:
+                    listViewBooks.Visible = true;
                     break;
                 case enumTopBar.authors:
+                    listViewAuthors.Visible = true;
                     break;
                 case enumTopBar.topUsers:
+                    listViewTopUsers.Visible = true;
                     break;
-                default:
+                default: 
                     break;
             }
         }
-        private void clearListViews()
+        private void InitializeListViews()
+        {
+            listViewMyCollection.View = View.Details;
+            listViewBooks.View = View.Details;
+            listViewAuthors.View = View.Details;
+            listViewTopUsers.View = View.Details;
+
+            listViewMyCollection.Columns.Add("Title", 200);
+            listViewMyCollection.Columns.Add("Author", 200);
+            listViewMyCollection.Columns.Add("Times Read", 200);
+            listViewMyCollection.Columns.Add("Date Read", 200);
+            
+            listViewBooks.Columns.Add("Title", 200);
+            listViewBooks.Columns.Add("Author", 200);
+            listViewBooks.Columns.Add("Release Year", 200);
+            listViewBooks.Columns.Add("Average Read Time", 200);
+            
+            listViewAuthors.Columns.Add("Name", 200);
+            listViewAuthors.Columns.Add("Surname", 200);
+            listViewAuthors.Columns.Add("Born In", 200);
+            listViewAuthors.Columns.Add("Died In", 200);
+            
+            listViewTopUsers.Columns.Add("Username", 200);
+            listViewTopUsers.Columns.Add("Time Spent Reading", 200);
+            
+        }
+        private void ClearListViews()
         {
             listViewAuthors.Items.Clear();
             listViewBooks.Items.Clear();
