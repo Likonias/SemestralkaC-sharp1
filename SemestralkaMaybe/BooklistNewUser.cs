@@ -32,6 +32,7 @@ namespace SemestralkaMaybe
                 }
                 foreach (UserEntity user in entitiesRecords.UserEntities)
                 {
+                    
                     if (user.UserName.Equals(textBoxUsername.Text))
                     {
                         throw new Exception("This username has been already used!");

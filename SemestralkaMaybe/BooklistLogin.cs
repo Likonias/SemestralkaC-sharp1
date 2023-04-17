@@ -34,7 +34,6 @@ namespace SemestralkaMaybe
 
         private void buttonLogin_Click(object sender, EventArgs e)
         {
-
             foreach (UserEntity user in entitiesRecords.UserEntities)
             {
                 if (user.UserName.Equals(textBoxUsername.Text))
@@ -50,7 +49,6 @@ namespace SemestralkaMaybe
                     return;
                 }
             }
-
             MessageBox.Show("Invalid User!");
 
         }
@@ -60,8 +58,11 @@ namespace SemestralkaMaybe
             BooklistNewUser newUser = new BooklistNewUser(entitiesRecords);
             newUser.ShowDialog();
             UserEntity createdUser = newUser.user;
-            entitiesRecords.AddUser(createdUser);
-            SaveUserEntity();
+            if(createdUser != null )
+            {
+                entitiesRecords.AddUser(createdUser);
+                SaveUserEntity();
+            }
         }
 
         private void SaveUserEntity()
