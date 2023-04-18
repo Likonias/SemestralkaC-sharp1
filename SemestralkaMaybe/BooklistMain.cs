@@ -72,6 +72,7 @@ namespace SemestralkaMaybe
                 + "Username: " + selectedUser.UserName + "\n"
                 + "Time spent reading: " + selectedUser.TimeSpentReading;
         }
+        
         private void SelectListView()
         {
             listViewMyCollection.Visible = false;
@@ -82,15 +83,50 @@ namespace SemestralkaMaybe
             switch(topBarSelected)
             {
                 case enumTopBar.myCollection:
+                    foreach (Book book in selectedUser.BooksRead)
+                    {
+                        ListViewItem listViewItem = new ListViewItem(book.Title);
+                        listViewItem.SubItems.Add(book.Author.FullName);
+                        listViewItem.SubItems.Add(book.TimesRead.ToString());
+                        listViewItem.SubItems.Add(book.DateRead.ToString());
+                    }
                     listViewMyCollection.Visible = true;
                     break;
                 case enumTopBar.books:
+                    foreach (Book book in entitiesRecords.Books)
+                    {
+                        ListViewItem listViewItem = new ListViewItem(book.Title);
+                        listViewItem.SubItems.Add(book.Author.FullName);
+                        listViewItem.SubItems.Add(book.ReleaseYear.ToString());
+                        listViewItem.SubItems.Add(book.AverageReadTime.ToString());
+                    }
                     listViewBooks.Visible = true;
                     break;
                 case enumTopBar.authors:
+                    foreach (Author author in entitiesRecords.Authors)
+                    {
+                        ListViewItem listViewItem = new ListViewItem(author.Name);
+                        listViewItem.SubItems.Add(author.Surname);
+                        listViewItem.SubItems.Add(author.BornInYear.ToString());
+                        if(author.DiedInYear == null)
+                        {
+                            listViewItem.SubItems.Add("-");
+                        }
+                        else
+                        {
+                            listViewItem.SubItems.Add(author.DiedInYear.ToString());
+                        }
+                    }
                     listViewAuthors.Visible = true;
                     break;
                 case enumTopBar.topUsers:
+                    List<UserEntity> topUsers = entitiesRecords.UserEntities.OrderBy(e => e.TimeSpentReading).ToList();
+                    for(int i = 0; i < 10; i++)
+                    {
+                        ListViewItem listViewItem = new ListViewItem();
+                        //dothis
+                        sss
+                    }
                     listViewTopUsers.Visible = true;
                     break;
                 default: 
