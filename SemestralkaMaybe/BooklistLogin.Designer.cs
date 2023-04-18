@@ -128,7 +128,10 @@
             this.Controls.Add(this.buttonExit);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "BooklistLogin";
             this.Text = "BookList Login";
             this.ResumeLayout(false);

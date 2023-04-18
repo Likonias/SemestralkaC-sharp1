@@ -21,7 +21,6 @@ namespace SemestralkaMaybe
         public BooklistMain()
         {
             InitializeComponent();
-            topBarSelected = enumTopBar.myCollection;
             BooklistLogin booklistLogin = new BooklistLogin();
             booklistLogin.ShowDialog();
             selectedUser = booklistLogin.SelectedUser;
@@ -32,7 +31,7 @@ namespace SemestralkaMaybe
             }
             UserInfoInitialize();
             InitializeListViews();
-            SelectListView();
+            buttonMyCollection_Click(buttonMyCollection, EventArgs.Empty);
         }
 
         private void UserInfoInitialize()
@@ -89,8 +88,8 @@ namespace SemestralkaMaybe
             listViewAuthors.Columns.Add("Born In", 200);
             listViewAuthors.Columns.Add("Died In", 200);
             
-            listViewTopUsers.Columns.Add("Username", 200);
-            listViewTopUsers.Columns.Add("Time Spent Reading", 200);
+            listViewTopUsers.Columns.Add("Username", 400);
+            listViewTopUsers.Columns.Add("Time Spent Reading", 400);
             
         }
         private void ClearListViews()
@@ -99,6 +98,46 @@ namespace SemestralkaMaybe
             listViewBooks.Items.Clear();
             listViewMyCollection.Items.Clear();
             listViewTopUsers.Items.Clear();
+        }
+
+        private void ClearSelectedButton()
+        {
+            buttonMyCollection.BackColor= Color.White;
+            buttonBooks.BackColor= Color.White;
+            buttonAuthors.BackColor= Color.White;   
+            buttonTopUsers.BackColor= Color.White;
+        }
+
+        private void buttonMyCollection_Click(object sender, EventArgs e)
+        {
+            ClearSelectedButton();
+            buttonMyCollection.BackColor= Color.LightGreen;
+            topBarSelected = enumTopBar.myCollection;
+            SelectListView();
+        }
+
+        private void buttonBooks_Click(object sender, EventArgs e)
+        {
+            ClearSelectedButton();
+            buttonBooks.BackColor = Color.LightGreen;
+            topBarSelected = enumTopBar.books;
+            SelectListView();
+        }
+
+        private void buttonAuthors_Click(object sender, EventArgs e)
+        {
+            ClearSelectedButton();
+            buttonAuthors.BackColor = Color.LightGreen;
+            topBarSelected = enumTopBar.authors;
+            SelectListView();
+        }
+
+        private void buttonTopUsers_Click(object sender, EventArgs e)
+        {
+            ClearSelectedButton();
+            buttonTopUsers.BackColor = Color.LightGreen;
+            topBarSelected = enumTopBar.topUsers;
+            SelectListView();
         }
     }
 }
