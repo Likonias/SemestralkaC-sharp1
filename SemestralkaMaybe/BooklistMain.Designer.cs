@@ -63,6 +63,7 @@
             buttonAdd.TabIndex = 1;
             buttonAdd.Text = "Add";
             buttonAdd.UseVisualStyleBackColor = true;
+            buttonAdd.Click += buttonAdd_Click;
             // 
             // buttonEdit
             // 
@@ -73,6 +74,7 @@
             buttonEdit.TabIndex = 2;
             buttonEdit.Text = "Edit";
             buttonEdit.UseVisualStyleBackColor = true;
+            buttonEdit.Click += buttonEdit_Click;
             // 
             // buttonRemove
             // 
@@ -83,6 +85,7 @@
             buttonRemove.TabIndex = 3;
             buttonRemove.Text = "Remove";
             buttonRemove.UseVisualStyleBackColor = true;
+            buttonRemove.Click += buttonRemove_Click;
             // 
             // labelUserInfo
             // 
@@ -175,6 +178,7 @@
             // 
             // listViewTopUsers
             // 
+            listViewTopUsers.Activation = ItemActivation.OneClick;
             listViewTopUsers.Location = new Point(10, 36);
             listViewTopUsers.Margin = new Padding(3, 2, 3, 2);
             listViewTopUsers.Name = "listViewTopUsers";

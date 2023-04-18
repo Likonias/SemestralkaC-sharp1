@@ -34,24 +34,7 @@ namespace SemestralkaMaybe
             InitializeListViews();
             buttonMyCollection_Click(buttonMyCollection, EventArgs.Empty);
         }
-        private void LoadEntities()
-        {
-            FileSerializerDeserializer<UserEntity> fileSerializerDeserializerUsers = new FileSerializerDeserializer<UserEntity>(entitiesRecords, "userEntityData.user");
-            fileSerializerDeserializerUsers.Load();
-            FileSerializerDeserializer<Author> fileSerializerDeserializerAuthors = new FileSerializerDeserializer<Author>(entitiesRecords, "authorEntityData.author");
-            fileSerializerDeserializerAuthors.Load();
-            FileSerializerDeserializer<Book> fileSerializerDeserializerBooks = new FileSerializerDeserializer<Book>(entitiesRecords, "bookEntityData.book");
-            fileSerializerDeserializerBooks.Load();
-        }
-        private void SaveEntities()
-        {
-            FileSerializerDeserializer<UserEntity> fileSerializerDeserializerUsers = new FileSerializerDeserializer<UserEntity>(entitiesRecords, "userEntityData.user");
-            fileSerializerDeserializerUsers.Save();
-            FileSerializerDeserializer<Author> fileSerializerDeserializerAuthors = new FileSerializerDeserializer<Author>(entitiesRecords, "authorEntityData.author");
-            fileSerializerDeserializerAuthors.Save();
-            FileSerializerDeserializer<Book> fileSerializerDeserializerBooks = new FileSerializerDeserializer<Book>(entitiesRecords, "bookEntityData.book");
-            fileSerializerDeserializerBooks.Save();
-        }
+
         private void Login()
         {
             BooklistLogin booklistLogin = new BooklistLogin(entitiesRecords);
@@ -79,7 +62,9 @@ namespace SemestralkaMaybe
             listViewBooks.Visible = false;
             listViewAuthors.Visible = false;
             listViewTopUsers.Visible = false;
-
+            buttonAdd.Visible = true;
+            buttonEdit.Visible = true;
+            buttonRemove.Visible = true;
             switch (topBarSelected)
             {
                 case enumTopBar.myCollection:
@@ -131,8 +116,9 @@ namespace SemestralkaMaybe
                         listViewTopUsers.Items.Add(listViewItem);
                     }
                     listViewTopUsers.Visible = true;
-                    break;
-                default:
+                    buttonAdd.Visible = false;
+                    buttonEdit.Visible = false;
+                    buttonRemove.Visible = false;
                     break;
             }
         }
@@ -142,6 +128,11 @@ namespace SemestralkaMaybe
             listViewBooks.View = View.Details;
             listViewAuthors.View = View.Details;
             listViewTopUsers.View = View.Details;
+
+            listViewMyCollection.FullRowSelect = true;
+            listViewBooks.FullRowSelect = true;
+            listViewAuthors.FullRowSelect = true;
+            listViewTopUsers.FullRowSelect = true;
 
             listViewMyCollection.Columns.Add("Title", 195);
             listViewMyCollection.Columns.Add("Author", 195);
@@ -210,6 +201,48 @@ namespace SemestralkaMaybe
             SelectListView();
         }
 
+        private void buttonAdd_Click(object sender, EventArgs e)
+        {
+            //finish
+            switch (topBarSelected)
+            {
+                case enumTopBar.myCollection:
+                    break;
+                case enumTopBar.books:
+                    break;
+                case enumTopBar.authors: 
+                    break;
+            }
+        }
+
+        private void buttonEdit_Click(object sender, EventArgs e)
+        {
+            //finish
+            switch (topBarSelected)
+            {
+                case enumTopBar.myCollection:
+                    break;
+                case enumTopBar.books:
+                    break;
+                case enumTopBar.authors:
+                    break;
+            }
+        }
+
+        private void buttonRemove_Click(object sender, EventArgs e)
+        {
+            //finish
+            switch (topBarSelected)
+            {
+                case enumTopBar.myCollection:
+                    break;
+                case enumTopBar.books:
+                    break;
+                case enumTopBar.authors:
+                    break;
+            }
+        }
+
         private void buttonLogout_Click(object sender, EventArgs e)
         {
             ClearListViews();
@@ -224,5 +257,26 @@ namespace SemestralkaMaybe
             SaveEntities();
             Environment.Exit(0);
         }
+
+        private void LoadEntities()
+        {
+            FileSerializerDeserializer<UserEntity> fileSerializerDeserializerUsers = new FileSerializerDeserializer<UserEntity>(entitiesRecords, "userEntityData.user");
+            fileSerializerDeserializerUsers.Load();
+            FileSerializerDeserializer<Author> fileSerializerDeserializerAuthors = new FileSerializerDeserializer<Author>(entitiesRecords, "authorEntityData.author");
+            fileSerializerDeserializerAuthors.Load();
+            FileSerializerDeserializer<Book> fileSerializerDeserializerBooks = new FileSerializerDeserializer<Book>(entitiesRecords, "bookEntityData.book");
+            fileSerializerDeserializerBooks.Load();
+        }
+        private void SaveEntities()
+        {
+            FileSerializerDeserializer<UserEntity> fileSerializerDeserializerUsers = new FileSerializerDeserializer<UserEntity>(entitiesRecords, "userEntityData.user");
+            fileSerializerDeserializerUsers.Save();
+            FileSerializerDeserializer<Author> fileSerializerDeserializerAuthors = new FileSerializerDeserializer<Author>(entitiesRecords, "authorEntityData.author");
+            fileSerializerDeserializerAuthors.Save();
+            FileSerializerDeserializer<Book> fileSerializerDeserializerBooks = new FileSerializerDeserializer<Book>(entitiesRecords, "bookEntityData.book");
+            fileSerializerDeserializerBooks.Save();
+        }
+
+        
     }
 }
