@@ -21,6 +21,8 @@ namespace SemestralkaMaybe
         public BooklistMain()
         {
             InitializeComponent();
+            BooklistNewBook dd = new BooklistNewBook();
+            dd.ShowDialog();
             try
             {
                 LoadEntities();

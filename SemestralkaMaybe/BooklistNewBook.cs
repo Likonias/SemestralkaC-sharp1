@@ -15,8 +15,6 @@ namespace SemestralkaMaybe
         public BooklistNewBook()
         {
             InitializeComponent();
-            
-
         }
     }
 }
