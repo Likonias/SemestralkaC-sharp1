@@ -21,6 +21,14 @@ namespace SemestralkaMaybe
         public BooklistMain()
         {
             InitializeComponent();
+            Login();
+            UserInfoInitialize();
+            InitializeListViews();
+            buttonMyCollection_Click(buttonMyCollection, EventArgs.Empty);
+        }
+        
+        private void Login()
+        {
             BooklistLogin booklistLogin = new BooklistLogin();
             booklistLogin.ShowDialog();
             selectedUser = booklistLogin.SelectedUser;
@@ -29,9 +37,6 @@ namespace SemestralkaMaybe
             {
                 Environment.Exit(0);
             }
-            UserInfoInitialize();
-            InitializeListViews();
-            buttonMyCollection_Click(buttonMyCollection, EventArgs.Empty);
         }
 
         private void UserInfoInitialize()
@@ -138,6 +143,14 @@ namespace SemestralkaMaybe
             buttonTopUsers.BackColor = Color.LightGreen;
             topBarSelected = enumTopBar.topUsers;
             SelectListView();
+        }
+
+        private void buttonLogout_Click(object sender, EventArgs e)
+        {
+            Login();
+            UserInfoInitialize();
+            InitializeListViews();
+            buttonMyCollection_Click(buttonMyCollection, EventArgs.Empty);
         }
     }
 }

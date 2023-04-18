@@ -188,6 +188,7 @@
             this.buttonLogout.TabIndex = 16;
             this.buttonLogout.Text = "Logout";
             this.buttonLogout.UseVisualStyleBackColor = true;
+            this.buttonLogout.Click += new System.EventHandler(this.buttonLogout_Click);
             // 
             // BooklistMain
             // 

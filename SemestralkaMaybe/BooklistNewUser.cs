@@ -45,7 +45,10 @@ namespace SemestralkaMaybe
                     user = new UserEntity(textBoxName.Text, textBoxSurname.Text, textBoxUsername.Text, password2, textBoxEMail.Text, false);
                     this.Close();
                 }
-                throw new Exception("Passwords do not match, please try again!");
+                else
+                {
+                    throw new Exception("Passwords do not match, please try again!");
+                }
             }
             catch (Exception ex)
             {
