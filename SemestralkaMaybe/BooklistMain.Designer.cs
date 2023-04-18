@@ -179,6 +179,7 @@
             this.buttonExitApplication.TabIndex = 15;
             this.buttonExitApplication.Text = "Exit Application";
             this.buttonExitApplication.UseVisualStyleBackColor = true;
+            this.buttonExitApplication.Click += new System.EventHandler(this.buttonExitApplication_Click);
             // 
             // buttonLogout
             // 

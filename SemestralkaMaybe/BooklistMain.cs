@@ -21,15 +21,41 @@ namespace SemestralkaMaybe
         public BooklistMain()
         {
             InitializeComponent();
+            try
+            {
+                LoadEntities();
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("Loading Unable");
+            }
             Login();
             UserInfoInitialize();
             InitializeListViews();
             buttonMyCollection_Click(buttonMyCollection, EventArgs.Empty);
+            
         }
-        
+        private void LoadEntities()
+        {
+            FileSerializerDeserializer<UserEntity> fileSerializerDeserializerUsers = new FileSerializerDeserializer<UserEntity>(entitiesRecords, "userEntityData.user");
+            fileSerializerDeserializerUsers.Load();
+            FileSerializerDeserializer<Author> fileSerializerDeserializerAuthors = new FileSerializerDeserializer<Author>(entitiesRecords, "authorEntityData.author");
+            fileSerializerDeserializerAuthors.Load();
+            FileSerializerDeserializer<Book> fileSerializerDeserializerBooks = new FileSerializerDeserializer<Book>(entitiesRecords, "bookEntityData.book");
+            fileSerializerDeserializerBooks.Load();
+        }
+        private void SaveEntities()
+        {
+            FileSerializerDeserializer<UserEntity> fileSerializerDeserializerUsers = new FileSerializerDeserializer<UserEntity>(entitiesRecords, "userEntityData.user");
+            fileSerializerDeserializerUsers.Save();
+            FileSerializerDeserializer<Author> fileSerializerDeserializerAuthors = new FileSerializerDeserializer<Author>(entitiesRecords, "authorEntityData.author");
+            fileSerializerDeserializerAuthors.Save();
+            FileSerializerDeserializer<Book> fileSerializerDeserializerBooks = new FileSerializerDeserializer<Book>(entitiesRecords, "bookEntityData.book");
+            fileSerializerDeserializerBooks.Save();
+        }
         private void Login()
         {
-            BooklistLogin booklistLogin = new BooklistLogin();
+            BooklistLogin booklistLogin = new BooklistLogin(entitiesRecords);
             booklistLogin.ShowDialog();
             selectedUser = booklistLogin.SelectedUser;
             entitiesRecords = booklistLogin.EntitiesRecords;
@@ -78,23 +104,23 @@ namespace SemestralkaMaybe
             listViewAuthors.View = View.Details;
             listViewTopUsers.View = View.Details;
 
-            listViewMyCollection.Columns.Add("Title", 200);
-            listViewMyCollection.Columns.Add("Author", 200);
-            listViewMyCollection.Columns.Add("Times Read", 200);
-            listViewMyCollection.Columns.Add("Date Read", 200);
+            listViewMyCollection.Columns.Add("Title", 195);
+            listViewMyCollection.Columns.Add("Author", 195);
+            listViewMyCollection.Columns.Add("Times Read", 195);
+            listViewMyCollection.Columns.Add("Date Read", 195);
             
-            listViewBooks.Columns.Add("Title", 200);
-            listViewBooks.Columns.Add("Author", 200);
-            listViewBooks.Columns.Add("Release Year", 200);
-            listViewBooks.Columns.Add("Average Read Time", 200);
+            listViewBooks.Columns.Add("Title", 195);
+            listViewBooks.Columns.Add("Author", 195);
+            listViewBooks.Columns.Add("Release Year", 195);
+            listViewBooks.Columns.Add("Average Read Time", 195);
             
-            listViewAuthors.Columns.Add("Name", 200);
-            listViewAuthors.Columns.Add("Surname", 200);
-            listViewAuthors.Columns.Add("Born In", 200);
-            listViewAuthors.Columns.Add("Died In", 200);
+            listViewAuthors.Columns.Add("Name", 195);
+            listViewAuthors.Columns.Add("Surname", 195);
+            listViewAuthors.Columns.Add("Born In", 195);
+            listViewAuthors.Columns.Add("Died In", 195);
             
-            listViewTopUsers.Columns.Add("Username", 400);
-            listViewTopUsers.Columns.Add("Time Spent Reading", 400);
+            listViewTopUsers.Columns.Add("Username", 390);
+            listViewTopUsers.Columns.Add("Time Spent Reading", 390);
             
         }
         private void ClearListViews()
@@ -147,10 +173,17 @@ namespace SemestralkaMaybe
 
         private void buttonLogout_Click(object sender, EventArgs e)
         {
+            ClearListViews();
             Login();
             UserInfoInitialize();
             InitializeListViews();
             buttonMyCollection_Click(buttonMyCollection, EventArgs.Empty);
+        }
+
+        private void buttonExitApplication_Click(object sender, EventArgs e)
+        {
+            SaveEntities();
+            Environment.Exit(0);
         }
     }
 }

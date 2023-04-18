@@ -7,21 +7,14 @@ namespace SemestralkaMaybe
 {
     public partial class BooklistLogin : Form
     {
-        private EntitiesRecords entitiesRecords = new EntitiesRecords();
+        private EntitiesRecords entitiesRecords;
         private UserEntity selectedUser;
         public EntitiesRecords EntitiesRecords { get { return entitiesRecords; } }
         public UserEntity SelectedUser { get { return selectedUser; } }
         public bool exitClicked = false;
-        public BooklistLogin()
+        public BooklistLogin(EntitiesRecords entitiesRecords)
         {
-            try
-            {
-                LoadUserEntity();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.ToString());
-            }
+            this.entitiesRecords = entitiesRecords;
             InitializeComponent();
         }
 
@@ -71,10 +64,5 @@ namespace SemestralkaMaybe
             fileSerializerDeserializer.Save();
         }
 
-        private void LoadUserEntity()
-        {
-            FileSerializerDeserializer<UserEntity> fileSerializerDeserializer = new FileSerializerDeserializer<UserEntity>(entitiesRecords, "userEntityData.user");
-            fileSerializerDeserializer.Load();
-        }
     }
 }
