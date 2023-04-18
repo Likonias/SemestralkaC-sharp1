@@ -33,7 +33,6 @@ namespace SemestralkaMaybe
             UserInfoInitialize();
             InitializeListViews();
             buttonMyCollection_Click(buttonMyCollection, EventArgs.Empty);
-            
         }
         private void LoadEntities()
         {
@@ -72,15 +71,16 @@ namespace SemestralkaMaybe
                 + "Username: " + selectedUser.UserName + "\n"
                 + "Time spent reading: " + selectedUser.TimeSpentReading;
         }
-        
+
         private void SelectListView()
         {
+            ClearListViews();
             listViewMyCollection.Visible = false;
             listViewBooks.Visible = false;
             listViewAuthors.Visible = false;
             listViewTopUsers.Visible = false;
 
-            switch(topBarSelected)
+            switch (topBarSelected)
             {
                 case enumTopBar.myCollection:
                     foreach (Book book in selectedUser.BooksRead)
@@ -89,6 +89,7 @@ namespace SemestralkaMaybe
                         listViewItem.SubItems.Add(book.Author.FullName);
                         listViewItem.SubItems.Add(book.TimesRead.ToString());
                         listViewItem.SubItems.Add(book.DateRead.ToString());
+                        listViewMyCollection.Items.Add(listViewItem);
                     }
                     listViewMyCollection.Visible = true;
                     break;
@@ -99,6 +100,7 @@ namespace SemestralkaMaybe
                         listViewItem.SubItems.Add(book.Author.FullName);
                         listViewItem.SubItems.Add(book.ReleaseYear.ToString());
                         listViewItem.SubItems.Add(book.AverageReadTime.ToString());
+                        listViewBooks.Items.Add(listViewItem);
                     }
                     listViewBooks.Visible = true;
                     break;
@@ -108,7 +110,7 @@ namespace SemestralkaMaybe
                         ListViewItem listViewItem = new ListViewItem(author.Name);
                         listViewItem.SubItems.Add(author.Surname);
                         listViewItem.SubItems.Add(author.BornInYear.ToString());
-                        if(author.DiedInYear == null)
+                        if (author.DiedInYear == null)
                         {
                             listViewItem.SubItems.Add("-");
                         }
@@ -116,20 +118,21 @@ namespace SemestralkaMaybe
                         {
                             listViewItem.SubItems.Add(author.DiedInYear.ToString());
                         }
+                        listViewAuthors.Items.Add(listViewItem);
                     }
                     listViewAuthors.Visible = true;
                     break;
                 case enumTopBar.topUsers:
                     List<UserEntity> topUsers = entitiesRecords.UserEntities.OrderBy(e => e.TimeSpentReading).ToList();
-                    for(int i = 0; i < 10; i++)
+                    for (int i = 0; i < topUsers.Count; i++)
                     {
-                        ListViewItem listViewItem = new ListViewItem();
-                        //dothis
-                        sss
+                        ListViewItem listViewItem = new ListViewItem(topUsers.ElementAt(i).UserName);
+                        listViewItem.SubItems.Add(topUsers.ElementAt(i).TimeSpentReading.ToString());
+                        listViewTopUsers.Items.Add(listViewItem);
                     }
                     listViewTopUsers.Visible = true;
                     break;
-                default: 
+                default:
                     break;
             }
         }
@@ -144,20 +147,20 @@ namespace SemestralkaMaybe
             listViewMyCollection.Columns.Add("Author", 195);
             listViewMyCollection.Columns.Add("Times Read", 195);
             listViewMyCollection.Columns.Add("Date Read", 195);
-            
+
             listViewBooks.Columns.Add("Title", 195);
             listViewBooks.Columns.Add("Author", 195);
             listViewBooks.Columns.Add("Release Year", 195);
             listViewBooks.Columns.Add("Average Read Time", 195);
-            
+
             listViewAuthors.Columns.Add("Name", 195);
             listViewAuthors.Columns.Add("Surname", 195);
             listViewAuthors.Columns.Add("Born In", 195);
             listViewAuthors.Columns.Add("Died In", 195);
-            
+
             listViewTopUsers.Columns.Add("Username", 390);
             listViewTopUsers.Columns.Add("Time Spent Reading", 390);
-            
+
         }
         private void ClearListViews()
         {
@@ -169,16 +172,16 @@ namespace SemestralkaMaybe
 
         private void ClearSelectedButton()
         {
-            buttonMyCollection.BackColor= Color.White;
-            buttonBooks.BackColor= Color.White;
-            buttonAuthors.BackColor= Color.White;   
-            buttonTopUsers.BackColor= Color.White;
+            buttonMyCollection.BackColor = Color.White;
+            buttonBooks.BackColor = Color.White;
+            buttonAuthors.BackColor = Color.White;
+            buttonTopUsers.BackColor = Color.White;
         }
 
         private void buttonMyCollection_Click(object sender, EventArgs e)
         {
             ClearSelectedButton();
-            buttonMyCollection.BackColor= Color.LightGreen;
+            buttonMyCollection.BackColor = Color.LightGreen;
             topBarSelected = enumTopBar.myCollection;
             SelectListView();
         }
