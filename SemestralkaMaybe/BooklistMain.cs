@@ -21,8 +21,6 @@ namespace SemestralkaMaybe
         public BooklistMain()
         {
             InitializeComponent();
-            BooklistNewBook dd = new BooklistNewBook();
-            dd.ShowDialog();
             try
             {
                 LoadEntities();
@@ -67,6 +65,9 @@ namespace SemestralkaMaybe
             buttonAdd.Visible = true;
             buttonEdit.Visible = true;
             buttonRemove.Visible = true;
+            buttonAddToMyCollection.Visible = false;
+            buttonShowAuthorsWorks.Visible = false;
+            buttonAdd.Text = "Add";
             switch (topBarSelected)
             {
                 case enumTopBar.myCollection:
@@ -79,6 +80,7 @@ namespace SemestralkaMaybe
                         listViewMyCollection.Items.Add(listViewItem);
                     }
                     listViewMyCollection.Visible = true;
+                    buttonAdd.Visible = false;
                     break;
                 case enumTopBar.books:
                     foreach (Book book in entitiesRecords.Books)
@@ -90,6 +92,8 @@ namespace SemestralkaMaybe
                         listViewBooks.Items.Add(listViewItem);
                     }
                     listViewBooks.Visible = true;
+                    buttonAddToMyCollection.Visible = true;
+                    buttonAdd.Text = "Add Book";
                     break;
                 case enumTopBar.authors:
                     foreach (Author author in entitiesRecords.Authors)
@@ -108,6 +112,8 @@ namespace SemestralkaMaybe
                         listViewAuthors.Items.Add(listViewItem);
                     }
                     listViewAuthors.Visible = true;
+                    buttonShowAuthorsWorks.Visible = true;
+                    buttonAdd.Text = "Add Author";
                     break;
                 case enumTopBar.topUsers:
                     List<UserEntity> topUsers = entitiesRecords.UserEntities.OrderBy(e => e.TimeSpentReading).ToList();
@@ -205,21 +211,30 @@ namespace SemestralkaMaybe
 
         private void buttonAdd_Click(object sender, EventArgs e)
         {
-            //finish
+            //TODO add click
             switch (topBarSelected)
             {
-                case enumTopBar.myCollection:
-                    break;
                 case enumTopBar.books:
+                    BooklistNewBook booklistNewBook = new BooklistNewBook();
+                    booklistNewBook.Text = "Booklist New Book";
+                    booklistNewBook.ShowDialog();
                     break;
-                case enumTopBar.authors: 
+                case enumTopBar.authors:
+                    BooklistNewAuthor booklistNewAuthor = new BooklistNewAuthor(null);
+                    booklistNewAuthor.Text = "Booklist New Author";
+                    booklistNewAuthor.ShowDialog();
+                    if(booklistNewAuthor.CreatedAuthor != null)
+                    {
+                        entitiesRecords.AddAuthor(booklistNewAuthor.CreatedAuthor);
+                    }
                     break;
             }
+            SelectListView();
         }
 
         private void buttonEdit_Click(object sender, EventArgs e)
         {
-            //finish
+            //TODO edit click
             switch (topBarSelected)
             {
                 case enumTopBar.myCollection:
@@ -227,13 +242,21 @@ namespace SemestralkaMaybe
                 case enumTopBar.books:
                     break;
                 case enumTopBar.authors:
+                    BooklistNewAuthor booklistNewAuthor = new BooklistNewAuthor(entitiesRecords.Authors[listViewAuthors.SelectedIndices[0]]);
+                    booklistNewAuthor.Text = "Booklist Edit Author";
+                    booklistNewAuthor.ShowDialog();
+                    if (booklistNewAuthor.CreatedAuthor != null)
+                    {
+                        entitiesRecords.Authors[listViewAuthors.SelectedIndices[0]] = booklistNewAuthor.CreatedAuthor;
+                    }
                     break;
             }
+            SelectListView();
         }
 
         private void buttonRemove_Click(object sender, EventArgs e)
         {
-            //finish
+            //TODO remove click
             switch (topBarSelected)
             {
                 case enumTopBar.myCollection:
@@ -241,8 +264,21 @@ namespace SemestralkaMaybe
                 case enumTopBar.books:
                     break;
                 case enumTopBar.authors:
+                    Author removedAuthor = entitiesRecords.Authors[listViewAuthors.SelectedIndices[0]];
+                    entitiesRecords.Authors.Remove(removedAuthor);
                     break;
             }
+            SelectListView();
+        }
+
+        private void buttonAddToMyCollection_Click(object sender, EventArgs e)
+        {
+            //TODO add to collection
+        }
+
+        private void buttonShowAuthorsWorks_Click(object sender, EventArgs e)
+        {
+            //TODO author works
         }
 
         private void buttonLogout_Click(object sender, EventArgs e)

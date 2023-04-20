@@ -32,10 +32,10 @@
             label2 = new Label();
             label3 = new Label();
             label4 = new Label();
-            textBox1 = new TextBox();
-            textBox2 = new TextBox();
-            textBox3 = new TextBox();
-            textBox4 = new TextBox();
+            textBoxName = new TextBox();
+            textBoxSurname = new TextBox();
+            textBoxBornIn = new TextBox();
+            textBoxDiedIn = new TextBox();
             buttonOk = new Button();
             buttonCancel = new Button();
             SuspendLayout();
@@ -76,34 +76,34 @@
             label4.TabIndex = 3;
             label4.Text = "Died in";
             // 
-            // textBox1
+            // textBoxName
             // 
-            textBox1.Location = new Point(90, 12);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(143, 23);
-            textBox1.TabIndex = 4;
+            textBoxName.Location = new Point(90, 12);
+            textBoxName.Name = "textBoxName";
+            textBoxName.Size = new Size(143, 23);
+            textBoxName.TabIndex = 4;
             // 
-            // textBox2
+            // textBoxSurname
             // 
-            textBox2.Location = new Point(90, 41);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(143, 23);
-            textBox2.TabIndex = 5;
+            textBoxSurname.Location = new Point(90, 41);
+            textBoxSurname.Name = "textBoxSurname";
+            textBoxSurname.Size = new Size(143, 23);
+            textBoxSurname.TabIndex = 5;
             // 
-            // textBox3
+            // textBoxBornIn
             // 
-            textBox3.Location = new Point(90, 70);
-            textBox3.Name = "textBox3";
-            textBox3.Size = new Size(143, 23);
-            textBox3.TabIndex = 6;
+            textBoxBornIn.Location = new Point(90, 70);
+            textBoxBornIn.Name = "textBoxBornIn";
+            textBoxBornIn.Size = new Size(143, 23);
+            textBoxBornIn.TabIndex = 6;
             // 
-            // textBox4
+            // textBoxDiedIn
             // 
-            textBox4.Location = new Point(90, 99);
-            textBox4.Name = "textBox4";
-            textBox4.PlaceholderText = "Optional";
-            textBox4.Size = new Size(143, 23);
-            textBox4.TabIndex = 7;
+            textBoxDiedIn.Location = new Point(90, 99);
+            textBoxDiedIn.Name = "textBoxDiedIn";
+            textBoxDiedIn.PlaceholderText = "Optional";
+            textBoxDiedIn.Size = new Size(143, 23);
+            textBoxDiedIn.TabIndex = 7;
             // 
             // buttonOk
             // 
@@ -113,6 +113,7 @@
             buttonOk.TabIndex = 8;
             buttonOk.Text = "OK";
             buttonOk.UseVisualStyleBackColor = true;
+            buttonOk.Click += buttonOk_Click;
             // 
             // buttonCancel
             // 
@@ -122,6 +123,7 @@
             buttonCancel.TabIndex = 9;
             buttonCancel.Text = "Cancel";
             buttonCancel.UseVisualStyleBackColor = true;
+            buttonCancel.Click += buttonCancel_Click;
             // 
             // BooklistNewAuthor
             // 
@@ -130,10 +132,10 @@
             ClientSize = new Size(244, 173);
             Controls.Add(buttonCancel);
             Controls.Add(buttonOk);
-            Controls.Add(textBox4);
-            Controls.Add(textBox3);
-            Controls.Add(textBox2);
-            Controls.Add(textBox1);
+            Controls.Add(textBoxDiedIn);
+            Controls.Add(textBoxBornIn);
+            Controls.Add(textBoxSurname);
+            Controls.Add(textBoxName);
             Controls.Add(label4);
             Controls.Add(label3);
             Controls.Add(label2);
@@ -153,10 +155,10 @@
         private Label label2;
         private Label label3;
         private Label label4;
-        private TextBox textBox1;
-        private TextBox textBox2;
-        private TextBox textBox3;
-        private TextBox textBox4;
+        private TextBox textBoxName;
+        private TextBox textBoxSurname;
+        private TextBox textBoxBornIn;
+        private TextBox textBoxDiedIn;
         private Button buttonOk;
         private Button buttonCancel;
     }

@@ -44,6 +44,8 @@
             listViewTopUsers = new ListView();
             buttonExitApplication = new Button();
             buttonLogout = new Button();
+            buttonAddToMyCollection = new Button();
+            buttonShowAuthorsWorks = new Button();
             SuspendLayout();
             // 
             // listViewMyCollection
@@ -56,7 +58,7 @@
             // 
             // buttonAdd
             // 
-            buttonAdd.Location = new Point(698, 130);
+            buttonAdd.Location = new Point(699, 346);
             buttonAdd.Margin = new Padding(3, 2, 3, 2);
             buttonAdd.Name = "buttonAdd";
             buttonAdd.Size = new Size(165, 22);
@@ -67,7 +69,7 @@
             // 
             // buttonEdit
             // 
-            buttonEdit.Location = new Point(698, 157);
+            buttonEdit.Location = new Point(699, 372);
             buttonEdit.Margin = new Padding(3, 2, 3, 2);
             buttonEdit.Name = "buttonEdit";
             buttonEdit.Size = new Size(165, 22);
@@ -78,7 +80,7 @@
             // 
             // buttonRemove
             // 
-            buttonRemove.Location = new Point(698, 183);
+            buttonRemove.Location = new Point(699, 398);
             buttonRemove.Margin = new Padding(3, 2, 3, 2);
             buttonRemove.Name = "buttonRemove";
             buttonRemove.Size = new Size(165, 22);
@@ -208,11 +210,33 @@
             buttonLogout.UseVisualStyleBackColor = true;
             buttonLogout.Click += buttonLogout_Click;
             // 
+            // buttonAddToMyCollection
+            // 
+            buttonAddToMyCollection.Location = new Point(699, 252);
+            buttonAddToMyCollection.Name = "buttonAddToMyCollection";
+            buttonAddToMyCollection.Size = new Size(165, 23);
+            buttonAddToMyCollection.TabIndex = 17;
+            buttonAddToMyCollection.Text = "Add To My Collection";
+            buttonAddToMyCollection.UseVisualStyleBackColor = true;
+            buttonAddToMyCollection.Click += buttonAddToMyCollection_Click;
+            // 
+            // buttonShowAuthorsWorks
+            // 
+            buttonShowAuthorsWorks.Location = new Point(699, 223);
+            buttonShowAuthorsWorks.Name = "buttonShowAuthorsWorks";
+            buttonShowAuthorsWorks.Size = new Size(165, 23);
+            buttonShowAuthorsWorks.TabIndex = 18;
+            buttonShowAuthorsWorks.Text = "Show Author's Works";
+            buttonShowAuthorsWorks.UseVisualStyleBackColor = true;
+            buttonShowAuthorsWorks.Click += buttonShowAuthorsWorks_Click;
+            // 
             // BooklistMain
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(875, 552);
+            Controls.Add(buttonShowAuthorsWorks);
+            Controls.Add(buttonAddToMyCollection);
             Controls.Add(buttonLogout);
             Controls.Add(buttonExitApplication);
             Controls.Add(listViewTopUsers);
@@ -255,5 +279,7 @@
         private ListView listViewTopUsers;
         private Button buttonExitApplication;
         private Button buttonLogout;
+        private Button buttonAddToMyCollection;
+        private Button buttonShowAuthorsWorks;
     }
 }
