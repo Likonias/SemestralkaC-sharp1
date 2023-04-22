@@ -16,21 +16,27 @@ namespace SemestralkaMaybe
     {
         private Book createdBook;
         private List<Author> authors;
+        private int createdAuthorIndex;
         public Book CreatedBook { get => createdBook; }
         public BooklistNewBook(List<Author> author, Book book)
         {
             InitializeComponent();
             createdBook = book;
             authors = author;
+            
             for (int i = 0; i < author.Count; i++)
             {
                 comboBoxAuthor.Items.Add(author[i].FullName);
+                if (book.Author.Equals(author[i]))
+                {
+                    createdAuthorIndex = i;
+                }
             }
             if (createdBook != null)
             {
                 textBoxTitle.Text = createdBook.Title;
                 textBoxYearReleased.Text = createdBook.ReleaseYear.ToString();
-                comboBoxAuthor.SelectedItem = book.Author;
+                comboBoxAuthor.SelectedIndex = createdAuthorIndex;
                 textBoxAverageReadTime.Text = createdBook.AverageReadTime.ToString();
             }
         }
