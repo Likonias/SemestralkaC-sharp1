@@ -27,7 +27,7 @@ namespace SemestralkaMaybe
             for (int i = 0; i < author.Count; i++)
             {
                 comboBoxAuthor.Items.Add(author[i].FullName);
-                if (book.Author.Equals(author[i]))
+                if (book != null && book.Author.Equals(author[i]))
                 {
                     createdAuthorIndex = i;
                 }

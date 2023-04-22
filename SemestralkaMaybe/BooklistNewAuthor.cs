@@ -47,11 +47,11 @@ namespace SemestralkaMaybe
                     }
                     if(diedIn == 0)
                     {
-                        createdAuthor = new Author(textBoxName.Text, textBoxSurname.Text, bornIn, null, null);
+                        createdAuthor = new Author(textBoxName.Text, textBoxSurname.Text, bornIn, null);
                     }
                     else
                     {
-                        createdAuthor = new Author(textBoxName.Text, textBoxSurname.Text, bornIn, diedIn, null);
+                        createdAuthor = new Author(textBoxName.Text, textBoxSurname.Text, bornIn, diedIn);
                     }
                     this.Close();
                 }
