@@ -35,17 +35,24 @@ namespace SemestralkaMaybe
             {
                 int.TryParse(textBoxBornIn.Text, out int bornIn);
                 int.TryParse(textBoxDiedIn.Text, out int diedIn);
-                if (textBoxName.Text.Length == 0 || textBoxSurname.Text.Length == 0 || bornIn == null)
+                if (textBoxName.Text.Length == 0 || textBoxSurname.Text.Length == 0 || textBoxBornIn.Text.Length == 0)
                 {
                     throw new Exception("Something went wrong, try again please!");
                 }
-                if ((0 < bornIn && bornIn < DateAndTime.Now.Year) && ((0 < diedIn && diedIn < DateAndTime.Now.Year) || diedIn == null))
+                if ((0 < bornIn && bornIn < DateAndTime.Now.Year) && ((0 < diedIn && diedIn < DateAndTime.Now.Year) || textBoxDiedIn.Text.Length == 0))
                 {
-                    if (bornIn >= diedIn)
+                    if (bornIn >= diedIn && diedIn != 0)
                     {
                         throw new Exception("Born in can't be higher than died in!");
                     }
-                    createdAuthor = new Author(textBoxName.Text, textBoxSurname.Text, bornIn, diedIn, null);
+                    if(diedIn == 0)
+                    {
+                        createdAuthor = new Author(textBoxName.Text, textBoxSurname.Text, bornIn, null, null);
+                    }
+                    else
+                    {
+                        createdAuthor = new Author(textBoxName.Text, textBoxSurname.Text, bornIn, diedIn, null);
+                    }
                     this.Close();
                 }
                 else

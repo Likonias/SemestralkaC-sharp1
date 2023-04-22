@@ -215,7 +215,7 @@ namespace SemestralkaMaybe
             switch (topBarSelected)
             {
                 case enumTopBar.books:
-                    BooklistNewBook booklistNewBook = new BooklistNewBook();
+                    BooklistNewBook booklistNewBook = new BooklistNewBook(entitiesRecords.Authors);
                     booklistNewBook.Text = "Booklist New Book";
                     booklistNewBook.ShowDialog();
                     break;
