@@ -15,25 +15,22 @@ namespace SemestralkaMaybe
     public partial class BooklistNewBook : Form
     {
         private Book createdBook;
-        public Book Book { get => createdBook; set => createdBook = value; }
+        private List<Author> authors;
+        public Book CreatedBook { get => createdBook; }
         public BooklistNewBook(List<Author> author, Book book)
         {
             InitializeComponent();
             createdBook = book;
-            int bookAuthorIndex = -1;
+            authors = author;
             for (int i = 0; i < author.Count; i++)
             {
                 comboBoxAuthor.Items.Add(author[i].FullName);
-                if (author[i] == book.Author)
-                {
-                    bookAuthorIndex = i;
-                }
             }
-            if(createdBook != null) 
+            if (createdBook != null)
             {
                 textBoxTitle.Text = createdBook.Title;
                 textBoxYearReleased.Text = createdBook.ReleaseYear.ToString();
-                comboBoxAuthor.SelectedIndex = bookAuthorIndex;
+                comboBoxAuthor.SelectedItem = book.Author;
                 textBoxAverageReadTime.Text = createdBook.AverageReadTime.ToString();
             }
         }
@@ -44,16 +41,20 @@ namespace SemestralkaMaybe
             {
                 int.TryParse(textBoxYearReleased.Text, out int yearReleased);
                 int.TryParse(textBoxAverageReadTime.Text, out int averageReadTime);
-                if (textBoxTitle.Text.Length == 0 || textBoxAverageReadTime.Text.Length == 0 || textBoxYearReleased.Text.Length == 0)
+                if (textBoxTitle.Text.Length == 0 || textBoxAverageReadTime.Text.Length == 0 || textBoxYearReleased.Text.Length == 0 || comboBoxAuthor.SelectedIndex < 0)
                 {
                     throw new Exception("Something went wrong, try again please!");
                 }
-                if(averageReadTime == 0)
+                if (averageReadTime == 0)
                 {
                     throw new Exception("Read time is wrong, try again please!");
                 }
-
-
+                if(yearReleased == 0)
+                {
+                    throw new Exception("Year release is wrong, try again please!");
+                }
+                createdBook = new Book(textBoxTitle.Text, yearReleased, authors[comboBoxAuthor.SelectedIndex], null, null, averageReadTime);
+                this.Close();
             }
             catch (Exception ex)
             {
@@ -66,5 +67,7 @@ namespace SemestralkaMaybe
             createdBook = null;
             this.Close();
         }
+
+        
     }
 }

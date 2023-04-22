@@ -28,18 +28,6 @@ namespace SemestralkaLibrary
             books.Remove(book);
         }
 
-        public Book FindBook(Book book)
-        {
-            foreach (Book bookCol in books) 
-            {
-                if (book.Equals(bookCol))
-                {
-                    return bookCol;
-                }
-            }
-            return null;
-        }
-
         public void AddAuthor(Author author)
         {
             authors.Add(author);
@@ -60,7 +48,7 @@ namespace SemestralkaLibrary
             userEntities.Remove(user);
         }
 
-        public Book[] Save()
+        Book[] ISavableLoadable<Book>.Save()
         {
             Book[] booksArray = books.ToArray();
             return booksArray;

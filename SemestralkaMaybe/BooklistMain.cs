@@ -211,13 +211,16 @@ namespace SemestralkaMaybe
 
         private void buttonAdd_Click(object sender, EventArgs e)
         {
-            //TODO add click
             switch (topBarSelected)
             {
                 case enumTopBar.books:
-                    BooklistNewBook booklistNewBook = new BooklistNewBook(entitiesRecords.Authors);
+                    BooklistNewBook booklistNewBook = new BooklistNewBook(entitiesRecords.Authors, null);
                     booklistNewBook.Text = "Booklist New Book";
                     booklistNewBook.ShowDialog();
+                    if(booklistNewBook.CreatedBook != null)
+                    {
+                        entitiesRecords.AddBook(booklistNewBook.CreatedBook);
+                    }
                     break;
                 case enumTopBar.authors:
                     BooklistNewAuthor booklistNewAuthor = new BooklistNewAuthor(null);
@@ -240,6 +243,13 @@ namespace SemestralkaMaybe
                 case enumTopBar.myCollection:
                     break;
                 case enumTopBar.books:
+                    BooklistNewBook booklistNewBook = new BooklistNewBook(entitiesRecords.Authors, entitiesRecords.Books[listViewBooks.SelectedIndices[0]]);
+                    booklistNewBook.Text = "Booklist Edit Book";
+                    booklistNewBook.ShowDialog();
+                    if (booklistNewBook.CreatedBook != null)
+                    {
+                        entitiesRecords.Books[listViewBooks.SelectedIndices[0]] = booklistNewBook.CreatedBook;
+                    }
                     break;
                 case enumTopBar.authors:
                     BooklistNewAuthor booklistNewAuthor = new BooklistNewAuthor(entitiesRecords.Authors[listViewAuthors.SelectedIndices[0]]);
@@ -262,6 +272,8 @@ namespace SemestralkaMaybe
                 case enumTopBar.myCollection:
                     break;
                 case enumTopBar.books:
+                    Book removedBook = entitiesRecords.Books[listViewBooks.SelectedIndices[0]];
+                    entitiesRecords.Books.Remove(removedBook);
                     break;
                 case enumTopBar.authors:
                     Author removedAuthor = entitiesRecords.Authors[listViewAuthors.SelectedIndices[0]];
