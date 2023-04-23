@@ -47,5 +47,25 @@ namespace SemestralkaMaybe.Entities
             IsHashed = isHashed;
         }
 
+        public void AddBook(Book book)
+        {
+            booksRead.Add(book);
+            UpdateTimeSpentReading();
+        }
+
+        public void RemoveBook(Book book)
+        {
+            booksRead.Remove(book);
+            UpdateTimeSpentReading();
+        }
+
+        private void UpdateTimeSpentReading()
+        {
+            timeSpentReading = 0;
+            for (int i = 0; i < booksRead.Count; i++)
+            {
+                timeSpentReading += booksRead[i].AverageReadTime;
+            }
+        }
     }
 }

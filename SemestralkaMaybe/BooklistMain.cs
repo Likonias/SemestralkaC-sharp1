@@ -116,7 +116,7 @@ namespace SemestralkaMaybe
                     buttonAdd.Text = "Add Author";
                     break;
                 case enumTopBar.topUsers:
-                    List<UserEntity> topUsers = entitiesRecords.UserEntities.OrderBy(e => e.TimeSpentReading).ToList();
+                    List<UserEntity> topUsers = entitiesRecords.UserEntities.OrderByDescending(e => e.TimeSpentReading).ToList();
                     for (int i = 0; i < topUsers.Count; i++)
                     {
                         ListViewItem listViewItem = new ListViewItem(topUsers.ElementAt(i).UserName);
@@ -270,6 +270,8 @@ namespace SemestralkaMaybe
             switch (topBarSelected)
             {
                 case enumTopBar.myCollection:
+                    Book removedBookUser = selectedUser.BooksRead[listViewMyCollection.SelectedIndices[0]];
+                    selectedUser.RemoveBook(removedBookUser);
                     break;
                 case enumTopBar.books:
                     Book removedBook = entitiesRecords.Books[listViewBooks.SelectedIndices[0]];
@@ -285,7 +287,10 @@ namespace SemestralkaMaybe
 
         private void buttonAddToMyCollection_Click(object sender, EventArgs e)
         {
-            //TODO add to collection
+            Book selectedBook = entitiesRecords.Books[listViewBooks.SelectedIndices[0]];
+            selectedBook.TimesRead = 1;
+            selectedBook.DateRead = DateTime.Now;
+            selectedUser.AddBook(selectedBook);
         }
 
         private void buttonShowAuthorsWorks_Click(object sender, EventArgs e)
