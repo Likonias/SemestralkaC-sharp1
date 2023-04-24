@@ -37,7 +37,7 @@
             buttonBooks = new Button();
             buttonAuthors = new Button();
             buttonTopUsers = new Button();
-            textBox1 = new TextBox();
+            textBoxSearch = new TextBox();
             buttonSearch = new Button();
             listViewBooks = new ListView();
             listViewAuthors = new ListView();
@@ -142,13 +142,13 @@
             buttonTopUsers.UseVisualStyleBackColor = true;
             buttonTopUsers.Click += buttonTopUsers_Click;
             // 
-            // textBox1
+            // textBoxSearch
             // 
-            textBox1.Location = new Point(452, 10);
-            textBox1.Margin = new Padding(3, 2, 3, 2);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(133, 23);
-            textBox1.TabIndex = 10;
+            textBoxSearch.Location = new Point(452, 10);
+            textBoxSearch.Margin = new Padding(3, 2, 3, 2);
+            textBoxSearch.Name = "textBoxSearch";
+            textBoxSearch.Size = new Size(133, 23);
+            textBoxSearch.TabIndex = 10;
             // 
             // buttonSearch
             // 
@@ -159,6 +159,7 @@
             buttonSearch.TabIndex = 11;
             buttonSearch.Text = "Search";
             buttonSearch.UseVisualStyleBackColor = true;
+            buttonSearch.Click += buttonSearch_Click;
             // 
             // listViewBooks
             // 
@@ -243,7 +244,7 @@
             Controls.Add(listViewAuthors);
             Controls.Add(listViewBooks);
             Controls.Add(buttonSearch);
-            Controls.Add(textBox1);
+            Controls.Add(textBoxSearch);
             Controls.Add(buttonTopUsers);
             Controls.Add(buttonAuthors);
             Controls.Add(buttonBooks);
@@ -272,7 +273,7 @@
         private Button buttonBooks;
         private Button buttonAuthors;
         private Button buttonTopUsers;
-        private TextBox textBox1;
+        private TextBox textBoxSearch;
         private Button buttonSearch;
         private ListView listViewBooks;
         private ListView listViewAuthors;
