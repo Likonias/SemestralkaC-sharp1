@@ -285,7 +285,7 @@ namespace SemestralkaMaybe
         private void buttonAddToMyCollection_Click(object sender, EventArgs e)
         {
             Book selectedBook = entitiesRecords.Books[listViewBooks.SelectedIndices[0]];
-            if (!selectedUser.BooksRead.Contains(selectedBook))
+            if (selectedUser.BooksRead.Contains(selectedBook))
             {
                 MessageBox.Show("The book is already in your collection.");
             }
