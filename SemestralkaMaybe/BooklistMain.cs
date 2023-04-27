@@ -300,6 +300,10 @@ namespace SemestralkaMaybe
         private void buttonShowAuthorsWorks_Click(object sender, EventArgs e)
         {
             //TODO author works
+
+
+
+
         }
 
         private void buttonLogout_Click(object sender, EventArgs e)
