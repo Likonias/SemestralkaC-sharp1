@@ -294,6 +294,10 @@ namespace SemestralkaMaybe
         {
             try
             {
+                if(listViewBooks.SelectedItems.Count == 0)
+                {
+                    throw new Exception("You haven't selected a book!");
+                }
                 Book selectedBook = entitiesRecords.Books[listViewBooks.SelectedIndices[0]];
                 foreach (Book book in selectedUser.BooksRead)
                 {
@@ -343,11 +347,17 @@ namespace SemestralkaMaybe
 
         private void buttonReread_Click(object sender, EventArgs e)
         {
-            Book selectedBook = selectedUser.BooksRead[listViewMyCollection.SelectedIndices[0]];
-            selectedBook.TimesRead += 1;
-            selectedBook.DateRead = DateTime.Now;
-            selectedUser.BooksRead[listViewMyCollection.SelectedIndices[0]] = selectedBook;
-
+            try
+            {
+                Book selectedBook = selectedUser.BooksRead[listViewMyCollection.SelectedIndices[0]];
+                selectedBook.TimesRead += 1;
+                selectedBook.DateRead = DateTime.Now;
+                selectedUser.BooksRead[listViewMyCollection.SelectedIndices[0]] = selectedBook;
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Something went wrong, please try again!");
+            }
         }
 
         private void buttonSearch_Click(object sender, EventArgs e)
