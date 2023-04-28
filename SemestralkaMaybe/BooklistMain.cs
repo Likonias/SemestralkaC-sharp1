@@ -21,14 +21,7 @@ namespace SemestralkaMaybe
         public BooklistMain()
         {
             InitializeComponent();
-            try
-            {
-                LoadEntities();
-            }
-            catch (Exception)
-            {
-                Console.WriteLine("Loading Unable");
-            }
+            LoadEntities();
             Login();
             UserInfoInitialize();
             InitializeListViews();
@@ -51,7 +44,6 @@ namespace SemestralkaMaybe
         {
             labelUserInfo.Text = "User info:\n\n"
                 + "Name: " + selectedUser.Name + " " + selectedUser.Surname + "\n"
-                + "Username: " + selectedUser.UserName + "\n"
                 + "Time spent reading: " + selectedUser.TimeSpentReading;
         }
 
@@ -67,6 +59,7 @@ namespace SemestralkaMaybe
             buttonRemove.Visible = true;
             buttonAddToMyCollection.Visible = false;
             buttonShowAuthorsWorks.Visible = false;
+            buttonReread.Visible = false;
             buttonAdd.Text = "Add";
             switch (topBarSelected)
             {
@@ -80,6 +73,7 @@ namespace SemestralkaMaybe
                         listViewMyCollection.Items.Add(listViewItem);
                     }
                     listViewMyCollection.Visible = true;
+                    buttonReread.Visible = true;
                     buttonAdd.Visible = false;
                     buttonEdit.Visible = false;
                     break;
@@ -120,7 +114,7 @@ namespace SemestralkaMaybe
                     List<UserEntity> topUsers = entitiesRecords.UserEntities.OrderByDescending(e => e.TimeSpentReading).ToList();
                     for (int i = 0; i < topUsers.Count; i++)
                     {
-                        ListViewItem listViewItem = new ListViewItem(topUsers.ElementAt(i).UserName);
+                        ListViewItem listViewItem = new ListViewItem(topUsers.ElementAt(i).Name + " " + topUsers.ElementAt(i).Surname);
                         listViewItem.SubItems.Add(topUsers.ElementAt(i).TimeSpentReading.ToString());
                         listViewTopUsers.Items.Add(listViewItem);
                     }
@@ -158,7 +152,7 @@ namespace SemestralkaMaybe
             listViewAuthors.Columns.Add("Born In", 195);
             listViewAuthors.Columns.Add("Died In", 195);
 
-            listViewTopUsers.Columns.Add("Username", 390);
+            listViewTopUsers.Columns.Add("User's Name", 390);
             listViewTopUsers.Columns.Add("Time Spent Reading", 390);
 
         }
@@ -238,72 +232,98 @@ namespace SemestralkaMaybe
 
         private void buttonEdit_Click(object sender, EventArgs e)
         {
-            switch (topBarSelected)
+            try
             {
-                case enumTopBar.books:
-                    BooklistNewBook booklistNewBook = new BooklistNewBook(entitiesRecords.Authors, entitiesRecords.Books[listViewBooks.SelectedIndices[0]]);
-                    booklistNewBook.Text = "Booklist Edit Book";
-                    booklistNewBook.ShowDialog();
-                    if (booklistNewBook.CreatedBook != null)
-                    {
-                        entitiesRecords.Books[listViewBooks.SelectedIndices[0]] = booklistNewBook.CreatedBook;
-                    }
-                    break;
-                case enumTopBar.authors:
-                    BooklistNewAuthor booklistNewAuthor = new BooklistNewAuthor(entitiesRecords.Authors[listViewAuthors.SelectedIndices[0]]);
-                    booklistNewAuthor.Text = "Booklist Edit Author";
-                    booklistNewAuthor.ShowDialog();
-                    if (booklistNewAuthor.CreatedAuthor != null)
-                    {
-                        entitiesRecords.Authors[listViewAuthors.SelectedIndices[0]] = booklistNewAuthor.CreatedAuthor;
-                    }
-                    break;
+                switch (topBarSelected)
+                {
+                    case enumTopBar.books:
+                        BooklistNewBook booklistNewBook = new BooklistNewBook(entitiesRecords.Authors, entitiesRecords.Books[listViewBooks.SelectedIndices[0]]);
+                        booklistNewBook.Text = "Booklist Edit Book";
+                        booklistNewBook.ShowDialog();
+                        if (booklistNewBook.CreatedBook != null)
+                        {
+                            entitiesRecords.Books[listViewBooks.SelectedIndices[0]] = booklistNewBook.CreatedBook;
+                        }
+                        break;
+                    case enumTopBar.authors:
+                        BooklistNewAuthor booklistNewAuthor = new BooklistNewAuthor(entitiesRecords.Authors[listViewAuthors.SelectedIndices[0]]);
+                        booklistNewAuthor.Text = "Booklist Edit Author";
+                        booklistNewAuthor.ShowDialog();
+                        if (booklistNewAuthor.CreatedAuthor != null)
+                        {
+                            entitiesRecords.Authors[listViewAuthors.SelectedIndices[0]] = booklistNewAuthor.CreatedAuthor;
+                        }
+                        break;
+                }
+                SelectListView();
             }
-            SelectListView();
+            catch (Exception)
+            {
+                MessageBox.Show("Something went wrong, please try again!");
+            }
         }
 
         private void buttonRemove_Click(object sender, EventArgs e)
         {
-            switch (topBarSelected)
+            try
             {
-                case enumTopBar.myCollection:
-                    Book removedBookUser = selectedUser.BooksRead[listViewMyCollection.SelectedIndices[0]];
-                    selectedUser.RemoveBook(removedBookUser);
-                    break;
-                case enumTopBar.books:
-                    Book removedBook = entitiesRecords.Books[listViewBooks.SelectedIndices[0]];
-                    entitiesRecords.Books.Remove(removedBook);
-                    break;
-                case enumTopBar.authors:
-                    Author removedAuthor = entitiesRecords.Authors[listViewAuthors.SelectedIndices[0]];
-                    entitiesRecords.Authors.Remove(removedAuthor);
-                    break;
+                switch (topBarSelected)
+                {
+                    case enumTopBar.myCollection:
+                        Book removedBookUser = selectedUser.BooksRead[listViewMyCollection.SelectedIndices[0]];
+                        selectedUser.RemoveBook(removedBookUser);
+                        break;
+                    case enumTopBar.books:
+                        Book removedBook = entitiesRecords.Books[listViewBooks.SelectedIndices[0]];
+                        entitiesRecords.Books.Remove(removedBook);
+                        break;
+                    case enumTopBar.authors:
+                        Author removedAuthor = entitiesRecords.Authors[listViewAuthors.SelectedIndices[0]];
+                        entitiesRecords.Authors.Remove(removedAuthor);
+                        break;
+                }
+                SelectListView();
             }
-            SelectListView();
+            catch (Exception)
+            {
+                MessageBox.Show("Something went wrong, please try again!");
+            }
         }
 
         private void buttonAddToMyCollection_Click(object sender, EventArgs e)
         {
-            Book selectedBook = entitiesRecords.Books[listViewBooks.SelectedIndices[0]];
-            if (selectedUser.BooksRead.Contains(selectedBook))
+            try
             {
-                MessageBox.Show("The book is already in your collection.");
-            }
-            else
-            {
+                Book selectedBook = entitiesRecords.Books[listViewBooks.SelectedIndices[0]];
+                foreach (Book book in selectedUser.BooksRead)
+                {
+                    if (book.Title == selectedBook.Title)
+                    {
+                        throw new Exception("The book is already in your collection!");
+                    }
+                }
                 selectedBook.TimesRead = 1;
                 selectedBook.DateRead = DateTime.Now;
                 selectedUser.AddBook(selectedBook);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
 
         private void buttonShowAuthorsWorks_Click(object sender, EventArgs e)
         {
-            //TODO author works
-
-
-
-
+            try
+            {
+                BooklistAuthorWork booklistAuthorWork = new BooklistAuthorWork(entitiesRecords.Books, entitiesRecords.Authors[listViewAuthors.SelectedIndices[0]]);
+                booklistAuthorWork.ShowDialog();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Author doesn't have any books in the database!");
+            }
+            
         }
 
         private void buttonLogout_Click(object sender, EventArgs e)
@@ -321,29 +341,110 @@ namespace SemestralkaMaybe
             Environment.Exit(0);
         }
 
-        private void LoadEntities()
+        private void buttonReread_Click(object sender, EventArgs e)
         {
-            FileSerializerDeserializer<UserEntity> fileSerializerDeserializerUsers = new FileSerializerDeserializer<UserEntity>(entitiesRecords, "userEntityData.user");
-            fileSerializerDeserializerUsers.Load();
-            FileSerializerDeserializer<Author> fileSerializerDeserializerAuthors = new FileSerializerDeserializer<Author>(entitiesRecords, "authorEntityData.author");
-            fileSerializerDeserializerAuthors.Load();
-            FileSerializerDeserializer<Book> fileSerializerDeserializerBooks = new FileSerializerDeserializer<Book>(entitiesRecords, "bookEntityData.book");
-            fileSerializerDeserializerBooks.Load();
-        }
-        private void SaveEntities()
-        {
-            FileSerializerDeserializer<UserEntity> fileSerializerDeserializerUsers = new FileSerializerDeserializer<UserEntity>(entitiesRecords, "userEntityData.user");
-            fileSerializerDeserializerUsers.Save();
-            FileSerializerDeserializer<Author> fileSerializerDeserializerAuthors = new FileSerializerDeserializer<Author>(entitiesRecords, "authorEntityData.author");
-            fileSerializerDeserializerAuthors.Save();
-            FileSerializerDeserializer<Book> fileSerializerDeserializerBooks = new FileSerializerDeserializer<Book>(entitiesRecords, "bookEntityData.book");
-            fileSerializerDeserializerBooks.Save();
+            Book selectedBook = selectedUser.BooksRead[listViewMyCollection.SelectedIndices[0]];
+            selectedBook.TimesRead += 1;
+            selectedBook.DateRead = DateTime.Now;
+            selectedUser.BooksRead[listViewMyCollection.SelectedIndices[0]] = selectedBook;
+
         }
 
         private void buttonSearch_Click(object sender, EventArgs e)
         {
-            //TODO search
+            string searchedThing = textBoxSearch.Text.ToLower();
+            int i = 0;
+            switch (topBarSelected)
+            {
+                case enumTopBar.myCollection:
+                    try
+                    {
+                        foreach (Book book in selectedUser.BooksRead)
+                        {
+                            if (book.Title.ToLower().Substring(0, searchedThing.Count()).Equals(searchedThing))
+                            {
+                                break;
+                            }
+                            i++;
+                        }
+                        listViewMyCollection.Items[i].Selected = true;
+                    }
+                    catch (Exception)
+                    {
+                        MessageBox.Show("Search failed! You can only search with book titles!");
+                    }
+                    break;
+                case enumTopBar.books:
+                    try
+                    {
+                        foreach (Book book in entitiesRecords.Books)
+                        {
+                            if (book.Title.ToLower().Substring(0, searchedThing.Count()).Equals(searchedThing))
+                            {
+                                break;
+                            }
+                            i++;
+                        }
+                        listViewBooks.Items[i].Selected = true;
+                    }
+                    catch (Exception)
+                    {
+                        MessageBox.Show("Search failed! You can only search with book titles!");
+                    }
+                    break;
+                case enumTopBar.authors:
+                    try
+                    {
+                        foreach (Author author in entitiesRecords.Authors)
+                        {
+                            if (author.Name.ToLower().Substring(0, searchedThing.Count()).Equals(searchedThing) || author.Surname.ToLower().Substring(0, searchedThing.Count()).Equals(searchedThing) || author.FullName.ToLower().Substring(0, searchedThing.Count()).Equals(searchedThing))
+                            {
+                                break;
+                            }
+                            i++;
+                        }
+                        listViewAuthors.Items[i].Selected = true;
+                    }
+                    catch (Exception)
+                    {
+
+                        MessageBox.Show("Search failed! You can only search with the author!");
+                    }
+                    break;
+            }
+
+        }
+
+        private void LoadEntities()
+        {
+            try
+            {
+                FileSerializerDeserializer<Author> fileSerializerDeserializerAuthors = new FileSerializerDeserializer<Author>(entitiesRecords, "authorEntityData.author");
+                fileSerializerDeserializerAuthors.Load();
+            }
+            catch (Exception) { Console.WriteLine("Loading Author Unable");}
             
+            try 
+            {
+                FileSerializerDeserializer<Book> fileSerializerDeserializerBooks = new FileSerializerDeserializer<Book>(entitiesRecords, "bookEntityData.book");
+                fileSerializerDeserializerBooks.Load();
+            } catch (Exception) { Console.WriteLine("Loading Book Unable");}
+
+            try
+            {
+                FileSerializerDeserializer<UserEntity> fileSerializerDeserializerUsers = new FileSerializerDeserializer<UserEntity>(entitiesRecords, "userEntityData.user");
+                fileSerializerDeserializerUsers.Load();
+            }
+            catch (Exception) { Console.WriteLine("Loading UserEntity Unable");}
+        }
+        private void SaveEntities()
+        {
+            FileSerializerDeserializer<Author> fileSerializerDeserializerAuthors = new FileSerializerDeserializer<Author>(entitiesRecords, "authorEntityData.author");
+            fileSerializerDeserializerAuthors.Save();
+            FileSerializerDeserializer<Book> fileSerializerDeserializerBooks = new FileSerializerDeserializer<Book>(entitiesRecords, "bookEntityData.book");
+            fileSerializerDeserializerBooks.Save();
+            FileSerializerDeserializer<UserEntity> fileSerializerDeserializerUsers = new FileSerializerDeserializer<UserEntity>(entitiesRecords, "userEntityData.user");
+            fileSerializerDeserializerUsers.Save();
         }
     }
 }

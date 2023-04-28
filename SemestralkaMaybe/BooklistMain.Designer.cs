@@ -46,6 +46,7 @@
             buttonLogout = new Button();
             buttonAddToMyCollection = new Button();
             buttonShowAuthorsWorks = new Button();
+            buttonReread = new Button();
             SuspendLayout();
             // 
             // listViewMyCollection
@@ -231,11 +232,22 @@
             buttonShowAuthorsWorks.UseVisualStyleBackColor = true;
             buttonShowAuthorsWorks.Click += buttonShowAuthorsWorks_Click;
             // 
+            // buttonReread
+            // 
+            buttonReread.Location = new Point(699, 281);
+            buttonReread.Name = "buttonReread";
+            buttonReread.Size = new Size(164, 23);
+            buttonReread.TabIndex = 19;
+            buttonReread.Text = "I Have Re-read";
+            buttonReread.UseVisualStyleBackColor = true;
+            buttonReread.Click += buttonReread_Click;
+            // 
             // BooklistMain
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(875, 552);
+            Controls.Add(buttonReread);
             Controls.Add(buttonShowAuthorsWorks);
             Controls.Add(buttonAddToMyCollection);
             Controls.Add(buttonLogout);
@@ -282,5 +294,6 @@
         private Button buttonLogout;
         private Button buttonAddToMyCollection;
         private Button buttonShowAuthorsWorks;
+        private Button buttonReread;
     }
 }

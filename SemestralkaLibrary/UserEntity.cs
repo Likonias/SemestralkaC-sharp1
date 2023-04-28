@@ -21,7 +21,7 @@ namespace SemestralkaMaybe.Entities
         public String Name { get => name; set => name = value; }
         public String Surname { get => surname; set => surname = value; }
         public List<Book> BooksRead { get => booksRead; set => booksRead = value; }
-        public double TimeSpentReading { get => timeSpentReading; set => timeSpentReading = value; }
+        public double TimeSpentReading { get { UpdateTimeSpentReading(); return timeSpentReading; } set => timeSpentReading = value; }
         public String EMail { get => eMail; set => eMail = value; }
         public String UserName { get => userName; set => userName = value; }
         public String Password { get => password; init => password = value; }
@@ -64,7 +64,7 @@ namespace SemestralkaMaybe.Entities
             timeSpentReading = 0;
             for (int i = 0; i < booksRead.Count; i++)
             {
-                timeSpentReading += booksRead[i].AverageReadTime;
+                timeSpentReading += (booksRead[i].AverageReadTime * (double)booksRead[i].TimesRead);
             }
         }
     }
