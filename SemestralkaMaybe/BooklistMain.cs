@@ -124,6 +124,7 @@ namespace SemestralkaMaybe
                     buttonRemove.Visible = false;
                     break;
             }
+            UserInfoInitialize();
         }
         private void InitializeListViews()
         {
@@ -309,6 +310,7 @@ namespace SemestralkaMaybe
                 selectedBook.TimesRead = 1;
                 selectedBook.DateRead = DateTime.Now;
                 selectedUser.AddBook(selectedBook);
+                SelectListView();
             }
             catch (Exception ex)
             {
@@ -353,6 +355,7 @@ namespace SemestralkaMaybe
                 selectedBook.TimesRead += 1;
                 selectedBook.DateRead = DateTime.Now;
                 selectedUser.BooksRead[listViewMyCollection.SelectedIndices[0]] = selectedBook;
+                SelectListView();
             }
             catch (Exception)
             {
